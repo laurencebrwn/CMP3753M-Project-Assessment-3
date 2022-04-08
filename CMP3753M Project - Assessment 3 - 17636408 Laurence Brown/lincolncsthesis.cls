@@ -317,7 +317,7 @@
     {\footnotesize \@schoolname \\ \vspace{0.25cm} \@collegename \\  \vspace{0.25cm}  \@universityname \par}
     
     % Some space and the submission statement
-    \vspace{3cm}
+    \vspace{1cm}
     {\footnotesize \submissionStatement \par}
     
     % Print out the supervisor
