@@ -1,0 +1,36 @@
+\section{Some notes}
+It is worth noting that this document is a project report template for the University of Lincoln, School of Computer Science. It should give you some direction and instruction for formatting and presenting your project report. If you have any suggestions or issues, please contact the creator of the template on which this is based, \texttt{bwilliams@lincoln.ac.uk}, or me at \texttt{mdoughty@lincoln.ac.uk}. The following subsection in this document demonstrates some capabilities of the template (such as setting your project title, and so forth). I have not covered how to use \LaTeX, as this assumes a working knowledge of the language.
+
+
+
+
+\section{Testing some mathematics}
+Here are two equations:
+
+\begin{align}
+a &= b + 1 \\
+\frac{\hbar^2}{2m}\nabla^2\Psi + V(\mathbf{r})\Psi
+&= -i\hbar \frac{\partial\Psi}{\partial t}    
+\end{align}
+
+
+And here is some text with some nice inline maths, $(x, y)$ wow $\gamma$ so cool $\rho$.
+
+
+\section{Undergraduate Project Report}
+Currently, this template is set up for use with undergraduate project reports. However, the template can be modified fairly easily to conform to, for example, an MComp project report.
+\section{Referencing}
+The included \texttt{[harvard]} in the document class command means that referencing will follow a Harvard style. You will be able to cite things inline with parentheses. You can do this by using \texttt{\textbackslash citep\{citekey\}}. It will print out something like this \citep{aad2012observation}. Or alternatively, you can use \texttt{\textbackslash cite\{citekey\}} to cite things like this \cite{chatrchyan2012observation}.
+
+It is worth noting that the standard for referencing is Harvard, so you will not need to change this option. However, please double and triple check this to make sure you are using the correct referencing style. Also, ask your supervisor to make sure. This template uses Bib\LaTeX~for referencing, with a Biber backend. This is primarily due to the extensive features Bib\LaTeX~provides, along with the option of glossaries. If you want to customise the referencing style, you can either modify the template slightly to use different options, or use \texttt{\textbackslash usepackage} again to reimport it. There's probably some commands to change its options after its been imported too.
+
+\subsection{Ludography}
+This report template also contains an optional ludography. For Games Computing students to use this, just put references into your bib file as usual with the game's details. Then, make sure \texttt{keywords} is set to \texttt{\{game\}}. This is what is used to determine which references are games, and which are actual papers. For a more elaborate example, see \texttt{bib/ludography.bib}.
+
+Also, make sure that the \texttt{title} key is actually the author of the game, and the \texttt{author} is the title of the game. The reason this is swapped around is because Bib\LaTeX~likes to print references out with the author first.
+
+Then, just add \texttt{\textbackslash printLudography} with an optional title argument to print out all citations like \texttt{\textbackslash printLudography} or \texttt{\textbackslash printLudography[Games]}.
+
+You can also use the \texttt{ludography} environment if you wish to print out some text before the list of games is printed. An example of this can be seen in \texttt{main.tex}.
+
+To cite games, you can \texttt{\textbackslash cite} it like any other reference. However, if you want it to display the title instead of the standard referencing style, you can use \texttt{\textbackslash citeGame} instead.
