@@ -1,38 +1,47 @@
-Here is a sentence, and you can see a nice picture in Figure \ref{fig:brayford}.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=\textwidth]{figures/brayford.jpg}
-    \caption{A picture of the Brayford from Google Images.}
-    \label{fig:brayford}
-\end{figure}
-
-Also, a table can be found in Table \ref{tbl:example-table}. You should use a \LaTeX~table generator like \url{https://www.tablesgenerator.com/} if you want to make your life easier.
-
-\begin{table}[h]
-    \caption{Here is a table. The caption goes above like this.}
-    \centering
-    \begin{tabular}{l|l|c}
-        First name & Last name & Age \\
-        \hline\hline
-        Bob & Bobbington & 24 \\
-        Benth & Wavies & 49 \\
-        Joe & Bloggs & 37 \\
-        Billy & Bob & 10 \\
-
-    \end{tabular}
-    \label{tbl:example-table}
-\end{table}
-
-This section will cover a number of aspects of your project where appropriate. Not all projects will require every section though.The key thing is that you demonstrate critical awareness of all of the processes that you have employed in your work and that for all sections needed in your report you are presenting a justification for the methods you adopted and not just presenting a list of methods.
-
 \section{Project Management}
-Some awareness of project management should be demonstrated in all projects. This section should outline the nature of your project and the specific characteristics that need to be considered in determining  what project management methodology you should use. You should identify the specific demands of your project in terms of project management and support your rationale for the selection of a methodology with appropriate and recent academic references. Questions which may be relevant here are:
-\begin{enumerate}
-    \item What are the guiding principles and processes in managing your project?
-    \item What project management methods may be useful for this project?
-    \item How can you exploit their advantages for your project and mitigate their drawbacks?
-\end{enumerate}
+Some awareness of project management should be demonstrated in all projects. This section should outline the nature of your project and the specific characteristics that need to be considered in determining  what project management methodology you should use. 
+\begin{itemize}
+\item due to large nature of project (training time) and short timeframe - time and resource management key
+\item in order to asses the above, need to take into account both technical and theoretical research, as well as implementation and training time
+\item introduce methodology - a KANBAN style approach with waterfall style phases
+\item reasoning - checklist & limited multitasking approach of KANBAN (with agile principles) and phase planning of waterfall
+\end{itemize}
+
+
+You should identify the specific demands of your project in terms of project management and support your rationale for the selection of a methodology with appropriate and recent academic references. 
+\begin{itemize}
+\item KANBAN:
+\item allows me to be flexible and adaptable, if scope changes or risks occur
+\item allows me to be flexible with what i want to focus on based on current priorities
+\item allows constant improvement and iteration of the software while not being overwhelmed by multitasking
+\item kanban benefits - \nolinkurl{https://eprints.ugd.edu.mk/14949/1/030302.pdf}
+\item scrumbanfall - \nolinkurl{https://www.researchgate.net/profile/Krunal-Bhavsar/publication/339042133_Scrumbanfall_An_Agile_Integration_of_Scrum_and_Kanban_with_Waterfall_in_Software_Engineering/links/5e50b7a992851c7f7f4cc52b/Scrumbanfall-An-Agile-Integration-of-Scrum-and-Kanban-with-Waterfall-in-Software-Engineering.pdf}
+\item WATERFALL:
+\item allows me to manage phase time with waterfall - ie, not overspending time in one area, leaving another up to chance (ykwim)
+\item allows me to plan project to a low level of detail to manage time before beginning on work
+\item kanban scrum and waterfall comparison - \nolinkurl{http://www.rebe.rau.ro/RePEc/rau/jisomg/SU19/JISOM-SU19-A12.pdf}
+\end{itemize}
+
+
+Questions which may be relevant here are:
+What are the guiding principles and processes in managing your project?
+\begin{itemize}
+\item kanban - Visualize workflow
+\item kanban - Limit work in progress
+\item kanban - Continuous improvement
+\item waterfall - Sequential project structure
+\end{itemize} 
+
+What project management methods may be useful for this project?
+\begin{itemize}
+\item kanban board
+\item waterfall gantt chart for time planning
+\end{itemize}
+
+How can you exploit their advantages for your project and mitigate their drawbacks?
+\begin{itemize}
+\item 
+\end{itemize}
 
 \section{Software Development}
 There should be a methodological analysis of software development approaches used in your project. It is important to note that what is NOT required here is a pedestrian account of popular software development methodologies or a simplistic review of their strengths and weaknesses. 
@@ -44,6 +53,20 @@ Toolsets refer to both software development and to project management, so the co
 
 DO NOT justify the grounds for using specific toolsets and environments simply because you know them well or have developed skills already. 
 
+\begin{itemize}
+    \item python
+    \item tensorflow
+    \item keras
+    \item tensorboard - visualisation? and hp tuning
+    \item google cloud platform
+    \item google colab
+    \item sklearn - metrics and cv
+\end{itemize}
+
 \section{Research Methods}
 You should investigate the types of research methods necessary to validly answer the research questions that your project addresses. You should cite relevant sources to justify your choices.
-
+\begin{itemize}
+    \item abductive
+    \item primary data
+    
+\end{itemize}
