@@ -16,22 +16,49 @@ While abiding by the guiding principles mentioned above, the project will make u
 \end{figure}
 
 \section{Software Development}
-
+Text
 
 \section{Toolsets and Machine Environments}
-Toolsets refer to both software development and to project management, so the coverage should address both. This section will outline the tools for software development and project management process; it will make appropriate comparisons between tools available and argue for the most appropriate selection based on metrics, possibly a matrix diagram and other criteria.
+There are a number of toolsets used within this projects artefact, both software and hardware related. In order to reproduce the artifact, these must be installed as prerequisites to the project.
 
-DO NOT justify the grounds for using specific toolsets and environments simply because you know them well or have developed skills already. 
+\subsection{Software Requirements}
+Text
 
-\begin{itemize}
-    \item python
-    \item tensorflow
-    \item keras
-    \item tensorboard - visualisation? and hp tuning
-    \item google cloud platform
-    \item google colab
-    \item sklearn - metrics and cv
-\end{itemize}
+\subsubsection{Python}
+Text
+
+\subsubsection{TensorFlow}
+Text
+
+\subsubsection{Keras}
+Text
+
+\subsubsection{TensorBoard}
+Text
+
+\subsubsection{Google Cloud Platform - Development Environment}
+Text
+
+\subsubsection{Google Colab - Development Environment}
+Text
+
+\subsubsection{Jupyter Notebook - Development Environment}
+Text
+
+\subsubsection{GitHub}
+Text
+
+\subsubsection{Scikit-Learn}
+Text
+
+\subsubsection{Pandas}
+Text
+
+\subsubsection{Numpy}
+Text
+
+\subsection{Hardware Requirements}
+While TensorFlow can run on a large number of devices, there are some hardware limitations, especially if a Graphical Processing Unit (GPU) is used to accelerate performance. TensorFlow requires a CPU capable of AVX instructions, which most modern Computational Processing Unit's (CPU) support \citep{InstallT17:online}. If GPU acceleration is required and the device used has an NVIDIA GPU, then it must support compute unified device architecture (CUDA), a "parallel computing platform" which can "dramatically speed up computing applications by harnessing the power of GPUs" \citep{CUDAZone2:online}. If the device has a GPU that does not support CUDA, but does support DirectX 12 (e.g. an AMD GPU manufactured in the last several years), then Microsoft's DirectML can be used enable GPU support for TensorFlow \citep{Introduc93:online}. Precaution must be taken if DirectML is used however, as it has differing version requirements of Python, TensorFlow and Numpy.
 
 \section{Research Methods}
 You should investigate the types of research methods necessary to validly answer the research questions that your project addresses. You should cite relevant sources to justify your choices.
