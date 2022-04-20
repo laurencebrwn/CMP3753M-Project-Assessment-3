@@ -22,10 +22,12 @@ Text
 There are a number of toolsets used within this projects artefact, both software and hardware related. In order to reproduce the artifact, these must be installed as prerequisites to the project.
 
 \subsection{Software Requirements}
-Text
+The following sections introduce the software used to complete this research project. While some software, like the development environments and visualisation software like TensorBoard are optional and are not needed to train the models, some modification to the code might be needed to run without them.
+
+\phantomsection
 
 \subsubsection{Python}
-Text
+Python was the chosen language for this project, due to a number for reasons. Firstly Python is the most popular programming language worldwide, with a 27.95\% market share, according to the PYPL index \citep{PYPLPopu3:online}. This means not only is it well known by computer and data scientists, it is also well supported by both its richness of available libraries and its documentation. Its popularity directly influences its choice for project, by allowing others to pick up and further improve on findings from this research. Its availability of libraries is also a direct influence of choice for this project, as the majority of machine learning and deep learning libraries are supported by Python, such as TensorFlow, PyTorch and Scikit-Learn, with its dominance expected to remain for the foreseeable future \citep{info11040193}. The entirety of the projects code was written in Python and such is a hard requirement to run the projects artifact.
 
 \subsubsection{TensorFlow}
 Text
@@ -58,7 +60,7 @@ Text
 Text
 
 \subsection{Hardware Requirements}
-While TensorFlow can run on a large number of devices, there are some hardware limitations, especially if a Graphical Processing Unit (GPU) is used to accelerate performance. TensorFlow requires a CPU capable of AVX instructions, which most modern Computational Processing Unit's (CPU) support \citep{InstallT17:online}. If GPU acceleration is required and the device used has an NVIDIA GPU, then it must support compute unified device architecture (CUDA), a "parallel computing platform" which can "dramatically speed up computing applications by harnessing the power of GPUs" \citep{CUDAZone2:online}. If the device has a GPU that does not support CUDA, but does support DirectX 12 (e.g. an AMD GPU manufactured in the last several years), then Microsoft's DirectML can be used enable GPU support for TensorFlow \citep{Introduc93:online}. Precaution must be taken if DirectML is used however, as it has differing version requirements of Python, TensorFlow and Numpy.
+While TensorFlow can run on a large number of devices, there are some hardware limitations, especially if a Graphical Processing Unit (GPU) is used to accelerate performance. TensorFlow requires a CPU capable of AVX instructions, which most modern Computational Processing Unit's (CPU) support \citep{InstallT17:online}. If GPU acceleration is required and the device used has an NVIDIA GPU, then it must support compute unified device architecture (CUDA), a "parallel computing platform" which can "dramatically speed up computing applications by harnessing the power of GPUs" \citep{CUDAZone2:online}. If the device has a GPU that does not support CUDA, but does support DirectX 12 (e.g. an AMD GPU manufactured in the last several years), then Microsoft's DirectML can be used enable GPU support for TensorFlow \citep{Introduc93:online}. Precaution must be taken if DirectML is used however, as it has differing version requirements of Python, TensorFlow and NumPy.
 
 \section{Research Methods}
 You should investigate the types of research methods necessary to validly answer the research questions that your project addresses. You should cite relevant sources to justify your choices.
