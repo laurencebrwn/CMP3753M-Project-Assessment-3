@@ -1,5 +1,4 @@
 \section{Project Management}
-
 To effectively manage time within this project of large nature and short time frame, several project management methodologies and principals were implemented. In order to select the correct approach to incorporate project management into this project, methodologies were chosen based on the projects needs. Time within the project needed to be allocated towards both theoretical and technical research, to select the technologies to be used, models for evaluation and to learn how to use the technologies to implement them. As well as this, time should also be invested into the implementation and training of the models used in this evaluation, this will ensure fair and accurate results, and ample time to perform training. The selected methodology should also allow for flexibility, if issues arise or any risks identified occur, the project can remain on track.
 
 A kanban style approach was the selected project management methodology that met the above needs. The kanban approach is an agile methodology which divides a project into work items, which are then represented on a kanban board, splitting the work items into three categories: to do, in progress and complete. This is used along side its four agile inspired principles: visualise workflow, limit work in progress, focus on flow and continuous improvement. Using this approach means that project members are only ever focused on work in progress, meaning that items in the backlog, or to do section, can be re-prioritised and changed without impacting the project, allowing for continuous improvement of the product. Some benefits of kanban, as reported by \cite{ahmad2013kanban}, highlight a better understanding of the entire project process as the visualisation of work items give developers a clear understanding of the projects direction. Kanban's limitation of work in progress items also minimises lead time, with the likes of BBC worldwide reducing time to delivery by 37\% \citep{senapathi2011factors}.
@@ -19,7 +18,7 @@ While abiding by the guiding principles mentioned above, the project will make u
 Text
 
 \section{Toolsets and Machine Environments}
-There are a number of toolsets used within this projects artefact, both software and hardware related. In order to reproduce the artifact, these must be installed as prerequisites to the project.
+There are a number of toolsets used within this projects artefact, both software and hardware related. In order to reproduce the artefact, these must be installed as prerequisites to the project.
 
 \subsection{Software Requirements}
 The following sections introduce the software used to complete this research project. While some software, like the development environments and visualisation software like TensorBoard are optional and are not needed to train the models, some modification to the code might be needed to run without them.
@@ -33,20 +32,20 @@ Python's availability of libraries is also a direct influence of choice for this
 
 Finally Python has a very natural syntax which is very close to the English language, making it very readable, even by those with no prior knowledge of the language, compared to the likes of Java and C\# \citep{srinath2017python}.
 
-The entirety of the projects code was written in Python and such is a hard requirement to run the projects artifact. It is recommended to use Python 3.7 or later for TensorFlow support.
+The entirety of the projects code was written in Python and such is a hard requirement to run the projects artefact. It is recommended to use Python 3.7 or later for TensorFlow support.
 
 \subsubsection{TensorFlow - Keras}
 TensorFlow with Keras as the API layer was the chosen machine learning library for this project. TensorFlow is an "end-to-end open source platform for machine learning" with an eager execution environment \citep{TensorFl5:online}. TensorFlow is built upon tensors, which are immutable, multi-dimensional arrays, that are used to store objects, classes and weights that propagate through neural networks. TensorFlow was chosen over other libraries like PyTorch and SciKit-Learn for several reasons, one such reason is due to is eager execution, which means one can view results of operations instantly, as tensors are updated as they are called upon within the code. This allows one to quickly judge the success of a particular model instantly, as it trains, resulting in quick debugging. Another reason for choosing TensorFlow, was its integration with Keras, an API written to run on top of TensorFlow, which makes the creation of machine learning models simple and fast with its sequential model. The sequential model is a linear stack of layers which allows a user to prototype and build models from scratch, or improve on an existing library of models easily. Keras supplies over 30 pre-trained deep learning models for use within its API, this is a key feature in this project as it allows for accurate replication of the chosen models for evaluation and use of transfer learning in selected models.
 
-The TensorFlow is used in the entirety of this project and such is a hard requirement to run the artifact. It is recommended to use TensorFlow 2.0 or later, but with some code modifications, TensorFlow 1.0+ can also be used.
+The TensorFlow is used in the entirety of this project and such is a hard requirement to run the artefact. It is recommended to use TensorFlow 2.0 or later, but with some code modifications, TensorFlow 1.0+ can also be used.
 
 \subsubsection{TensorBoard}
 TensorBoard is a visualisation library for TensorFlow, that tracks and plots metrics from TensorFlow models as they train \citep{TensorBo28:online}. Within this project, TensorBoard was used to both extract visual data of the models performs, like accuracy and loss metrics, as well as tracking weather a particular model was over/under fitting. TensorBoard was chosen over other visualisation libraries like Matplotlib or seaborn due to it's tight integration with TensorFlow, and interactivity. TensorBoard also allows one to implement and track hyper-parameter tuning within a project, this was extremely beneficial for this project.
 
-In this project, TensorBoard 2.8.0 was used and is a hard requirement to run the artifact. As with TensorFlow, it is recommended to use TensorBoard 2.0 or later, but with some code modifications, TensorBoard 1.0+ can also be used.
+In this project, TensorBoard 2.8.0 was used and is a hard requirement to run the artefact. As with TensorFlow, it is recommended to use TensorBoard 2.0 or later, but with some code modifications, TensorBoard 1.0+ can also be used.
 
 \subsubsection{Scikit-Learn}
-Scikit-Learn is a machine learning library built for Python, which is bundled with many evaluation functions \citep{33Metric9:online}.
+Scikit-Learn is a machine learning library built for Python, which is bundled with many evaluation functions \citep{33Metric9:online} and cross validation functions \citep{31Crossv34:online}. 
 
 \subsubsection{Pandas}
 Text
@@ -57,7 +56,7 @@ Text
 \subsubsection{Google Cloud Platform - Development Environment}
 Google Cloud Platform was used in this project to train and test the initial selection of the six COVID-19 classification models and perform hyper-parameter tuning on each model. Two services used within Google Cloud Platform were Vertex AI \citep{VertexAI57:online} and Cloud Storage \citep{CloudSto72:online}. Vertex AI enables fast code building though Vertex AI Workbench, a Jupyter notebook environment with access to server grade GPUs. This enabled quick testing and finalisation of the first round of models for evaluation within this project. Vertex AI also has the ability to execute notebook runs on specific hardware and software instances in parallel, meaning fairness though out the first stages of model evaluation and a fast time to results thanks to the allocated NVIDIA Tesla K80s for each instance. Cloud storage was used to store the COVIDx-CXR database the models were trained on, alongside the saved trained model weights and the TensorBoard logs.
 
-Google Cloud Platform and its subsidiary solutions are not a requirement to run the artifact.
+Google Cloud Platform and its subsidiary solutions are not a requirement to run the artefact.
 
 \subsubsection{Google Colab - Development Environment}
 Text
