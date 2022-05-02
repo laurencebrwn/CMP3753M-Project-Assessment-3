@@ -36,13 +36,28 @@ Finally Python has a very natural syntax which is very close to the English lang
 The entirety of the projects code was written in Python and such is a hard requirement to run the projects artifact. It is recommended to use Python 3.7 or later for TensorFlow support.
 
 \subsubsection{TensorFlow - Keras}
-TensorFlow with Keras as the API layer was the chosen machine learning library for this project.
+TensorFlow with Keras as the API layer was the chosen machine learning library for this project. TensorFlow is an "end-to-end open source platform for machine learning" with an eager execution environment \citep{TensorFl5:online}. TensorFlow is built upon tensors, which are immutable, multi-dimensional arrays, that are used to store objects, classes and weights that propagate through neural networks. TensorFlow was chosen over other libraries like PyTorch and SciKit-Learn for several reasons, one such reason is due to is eager execution, which means one can view results of operations instantly, as tensors are updated as they are called upon within the code. This allows one to quickly judge the success of a particular model instantly, as it trains, resulting in quick debugging. Another reason for choosing TensorFlow, was its integration with Keras, an API written to run on top of TensorFlow, which makes the creation of machine learning models simple and fast with its sequential model. The sequential model is a linear stack of layers which allows a user to prototype and build models from scratch, or improve on an existing library of models easily. Keras supplies over 30 pre-trained deep learning models for use within its API, this is a key feature in this project as it allows for accurate replication of the chosen models for evaluation and use of transfer learning in selected models.
+
+The TensorFlow is used in the entirety of this project and such is a hard requirement to run the artifact. It is recommended to use TensorFlow 2.0 or later, but with some code modifications, TensorFlow 1.0+ can also be used.
 
 \subsubsection{TensorBoard}
+TensorBoard is a visualisation library for TensorFlow, that tracks and plots metrics from TensorFlow models as they train \citep{TensorBo28:online}. Within this project, TensorBoard was used to both extract visual data of the models performs, like accuracy and loss metrics, as well as tracking weather a particular model was over/under fitting. TensorBoard was chosen over other visualisation libraries like Matplotlib or seaborn due to it's tight integration with TensorFlow, and interactivity. TensorBoard also allows one to implement and track hyper-parameter tuning within a project, this was extremely beneficial for this project.
+
+In this project, TensorBoard 2.8.0 was used and is a hard requirement to run the artifact. As with TensorFlow, it is recommended to use TensorBoard 2.0 or later, but with some code modifications, TensorBoard 1.0+ can also be used.
+
+\subsubsection{Scikit-Learn}
+Scikit-Learn is a machine learning library built for Python, which is bundled with many evaluation functions \citep{33Metric9:online}.
+
+\subsubsection{Pandas}
+Text
+
+\subsubsection{Numpy}
 Text
 
 \subsubsection{Google Cloud Platform - Development Environment}
-Text
+Google Cloud Platform was used in this project to train and test the initial selection of the six COVID-19 classification models and perform hyper-parameter tuning on each model. Two services used within Google Cloud Platform were Vertex AI \citep{VertexAI57:online} and Cloud Storage \citep{CloudSto72:online}. Vertex AI enables fast code building though Vertex AI Workbench, a Jupyter notebook environment with access to server grade GPUs. This enabled quick testing and finalisation of the first round of models for evaluation within this project. Vertex AI also has the ability to execute notebook runs on specific hardware and software instances in parallel, meaning fairness though out the first stages of model evaluation and a fast time to results thanks to the allocated NVIDIA Tesla K80s for each instance. Cloud storage was used to store the COVIDx-CXR database the models were trained on, alongside the saved trained model weights and the TensorBoard logs.
+
+Google Cloud Platform and its subsidiary solutions are not a requirement to run the artifact.
 
 \subsubsection{Google Colab - Development Environment}
 Text
@@ -53,17 +68,8 @@ Text
 \subsubsection{GitHub}
 Text
 
-\subsubsection{Scikit-Learn}
-Text
-
-\subsubsection{Pandas}
-Text
-
-\subsubsection{Numpy}
-Text
-
 \subsection{Hardware Requirements}
-While TensorFlow can run on a large number of devices, there are some hardware limitations, especially if a Graphical Processing Unit (GPU) is used to accelerate performance. TensorFlow requires a CPU capable of AVX instructions, which most modern Computational Processing Unit's (CPU) support \citep{InstallT17:online}. If GPU acceleration is required and the device used has an NVIDIA GPU, then it must support compute unified device architecture (CUDA), a "parallel computing platform" which can "dramatically speed up computing applications by harnessing the power of GPUs" \citep{CUDAZone2:online}. If the device has a GPU that does not support CUDA, but does support DirectX 12 (e.g. an AMD GPU manufactured in the last several years), then Microsoft's DirectML can be used enable GPU support for TensorFlow \citep{Introduc93:online}. Precaution must be taken if DirectML is used however, as it has differing version requirements of Python, TensorFlow and NumPy.
+While TensorFlow can run on a large number of devices, there are some hardware limitations, especially if a Graphical Processing Unit (GPU) is used to accelerate performance. TensorFlow requires a CPU capable of AVX instructions, which most modern Computational Processing Unit's (CPU) support \citep{InstallT17:online}. If GPU acceleration is required and the device used has an NVIDIA GPU, then it must support compute unified device architecture (CUDA), a "parallel computing platform" which can "dramatically speed up computing applications by harnessing the power of GPUs" \citep{CUDAZone2:online}. If the device has a GPU that does not support CUDA, but does support DirectX 12 (e.g. an AMD GPU manufactured in the last several years), then Microsoft's DirectML can be used enable GPU support for TensorFlow \citep{Introduc93:online}. Precautions must be taken if DirectML is used however, as it has differing version requirements of Python, TensorFlow and NumPy.
 
 \section{Research Methods}
 You should investigate the types of research methods necessary to validly answer the research questions that your project addresses. You should cite relevant sources to justify your choices.
