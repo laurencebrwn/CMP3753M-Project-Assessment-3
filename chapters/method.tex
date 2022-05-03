@@ -15,7 +15,11 @@ While abiding by the guiding principles mentioned above, the project will make u
 \end{figure}
 
 \section{Software Development}
-Text
+Software development and the Software Development Life Cycle (SDLC) are important to all software products, solutions and research. The SDLC acts as a guide for the planning, development and delivery of any software focused project, in this case the planning of the problem domain, the development of multiple machine learning models and the delivery of evaluated results as a product of this software.
+
+The kanban approach was again used to guide software development, taking the kanban board and sectioning work items into stages of the SDLC: Backlog, Requirements, Design, Development, Testing, Deployment, Done. Put into context, a model not yet developed or researched, would be placed into the backlog, moving into the requirements section as research into existing implementations and dependencies of the model were carried out. When a model was in the design section, the structure of the model (e.g. hidden layer formatting) was put in place. In development the model would be built within a development environment, tested in the testing section and finally evaluated against the dataset when in the deployment section.
+
+Using this methodology when developing software for this project comes with the same advantages as it does for managing the project. Minimising work in progress means that a focus is on delivering working and evaluated models, while continually measuring and improving the life cycle of development for each model. This continual adaptability and flexibility means that kanban is especially suited to this project and serves towards the test and improve nature of the it.
 
 \section{Toolsets and Machine Environments}
 There are a number of toolsets used within this projects artefact, both software and hardware related. In order to reproduce the artefact, these must be installed as prerequisites to the project.
@@ -28,7 +32,7 @@ The following sections introduce the software used to complete this research pro
 \subsubsection{Python}
 Python was the chosen language for this project, due to a number for reasons. Firstly Python is the most popular programming language worldwide, with a 27.85 \% market share, according to the PYPL index \citep{PYPLPopu3:online}. This means not only is it well known by computer and data scientists, it is also well supported by both its richness of available libraries and its documentation. Its popularity directly influences its choice for project, by allowing others to pick up and further improve on findings from this research. Other languages in the PYPL list, such as Java, JavaScript and C\# also have a large community and wide documentation, however there are still other factors that set Python apart from these, making it the final choice. 
 
-\begin{table}[h]
+\begin{table}[H]
     \caption{PYPL Worldwide Index, May 2022 \citep{PYPLPopu3:online}.}
     \centering
     \begin{tabular}{c|l|r}
@@ -88,7 +92,9 @@ Pandas is an open source data manipulation and analysis library for Python \cite
 In this project, pandas 1.3.5 was used and is a hard requirement to run the artefact.
 
 \subsubsection{NumPy}
-NumPy is an open source scientific and mathematics library for Python \citep{NumPy90:online}. NumPy was used for basic numerical operations within the project, and is also a dependency for other libraries used. In this project, NumPy 1.21.6 was used and is a hard requirement to run the artefact.
+NumPy is an open source scientific and mathematics library for Python \citep{NumPy90:online}. NumPy was used for basic numerical operations within the project, and is also a dependency for other libraries used. 
+
+In this project, NumPy 1.21.6 was used and is a hard requirement to run the artefact.
 
 \subsubsection{Google Cloud Platform - Development Environment}
 Google Cloud Platform was used in this project to train and test the initial selection of the six COVID-19 classification models and perform hyper-parameter tuning on each model. Two services used within Google Cloud Platform were Vertex AI \citep{VertexAI57:online} and Cloud Storage \citep{CloudSto72:online}. Vertex AI enables fast code building though Vertex AI Workbench, a Jupyter notebook environment with access to server grade GPUs. This enabled quick testing and finalisation of the first round of models for evaluation within this project. Vertex AI also has the ability to execute notebook runs on specific hardware and software instances in parallel, meaning fairness though out the first stages of model evaluation and a fast time to results thanks to the allocated NVIDIA Tesla K80s for each instance. Cloud storage was used to store the COVIDx-CXR database the models were trained on, alongside the saved trained model weights and the TensorBoard logs.
