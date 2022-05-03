@@ -35,7 +35,7 @@ Finally Python has a very natural syntax which is very close to the English lang
 The entirety of the projects code was written in Python and such is a hard requirement to run the projects artefact. It is recommended to use Python 3.7 or later for TensorFlow support.
 
 \subsubsection{TensorFlow - Keras}
-TensorFlow with Keras as the API layer was the chosen machine learning library for this project. TensorFlow is an "end-to-end open source platform for machine learning" with an eager execution environment \citep{TensorFl5:online}. TensorFlow is built upon tensors, which are immutable, multi-dimensional arrays, that are used to store objects, classes and weights that propagate through neural networks. TensorFlow was chosen over other libraries like PyTorch and SciKit-Learn for several reasons, one such reason is due to is eager execution, which means one can view results of operations instantly, as tensors are updated as they are called upon within the code. This allows one to quickly judge the success of a particular model instantly, as it trains, resulting in quick debugging. Another reason for choosing TensorFlow, was its integration with Keras, an API written to run on top of TensorFlow, which makes the creation of machine learning models simple and fast with its sequential model. The sequential model is a linear stack of layers which allows a user to prototype and build models from scratch, or improve on an existing library of models easily. Keras supplies over 30 pre-trained deep learning models for use within its API, this is a key feature in this project as it allows for accurate replication of the chosen models for evaluation and use of transfer learning in selected models.
+TensorFlow with Keras as the API layer was the chosen machine learning library for this project. TensorFlow is an "end-to-end open source platform for machine learning" with an eager execution environment \citep{TensorFl5:online}. TensorFlow is built upon tensors, which are immutable, multi-dimensional arrays, that are used to store objects, classes and weights that propagate through neural networks. TensorFlow was chosen over other libraries like PyTorch and SciKit-Learn for several reasons, one such reason is due to is eager execution, which means one can view results of operations instantly, as tensors are updated as they are called upon within the code. This allows one to quickly judge the success of a particular model instantly, as it trains, resulting in quick debugging. Another reason for choosing TensorFlow, was its integration with Keras, an API written to run on top of TensorFlow, which makes the creation of machine learning models simple and fast with its sequential model \citep{AboutKer65:online}. The sequential model is a linear stack of layers which allows a user to prototype and build models from scratch, or improve on an existing library of models easily. Keras supplies over 30 pre-trained deep learning models for use within its API, this is a key feature in this project as it allows for accurate replication of the chosen models for evaluation and use of transfer learning in selected models.
 
 The TensorFlow is used in the entirety of this project and such is a hard requirement to run the artefact. It is recommended to use TensorFlow 2.0 or later, but with some code modifications, TensorFlow 1.0+ can also be used.
 
@@ -45,10 +45,18 @@ TensorBoard is a visualisation library for TensorFlow, that tracks and plots met
 In this project, TensorBoard 2.8.0 was used and is a hard requirement to run the artefact. As with TensorFlow, it is recommended to use TensorBoard 2.0 or later, but with some code modifications, TensorBoard 1.0+ can also be used.
 
 \subsubsection{Scikit-Learn}
-Scikit-Learn is a machine learning library built for Python, which is bundled with many evaluation functions \citep{33Metric9:online} and cross validation functions \citep{31Crossv34:online}. 
+Scikit-Learn is a machine learning library built for Python, which is bundled with many evaluation functions \citep{33Metric9:online} and cross validation functions \citep{31Crossv34:online}. The evaluation functions used within Scikit-Learn provided accuracy, precision, recall, F1 score and confusion matrix metrics, for each trained model in the project. Scikit-Learn's evaluation functions were chosen over Keras' inbuilt functions as Keras' own evaluation functions are limited to only providing loss and accuracy data\citep{Modeltra48:online}, with other metrics having to be calculated manually, making Scikit-Learn a faster and easier to implement solution. 
+
+Scikit-Learn's Stratified K-Fold cross validation implementation was also used within this project. This is used to ensure fairness when evaluating models performance, by taking an average of each folds validation accuracy', the possibility of dataset or training inconsistencies are removed. Keras offers no in built solution to cross validation, so much like the evaluation metrics, has to be performed manually, making Scikit-Learn a faster and easier to implement solution.
+
+Scikit-Learn was also used to shuffle and re-sample the training data, so that there was no bias towards a particular class or model due to possible bias in the dataset structure.
+
+In this project, Scikit-Learn 1.0.2 was used and is a hard requirement to run the artefact.
 
 \subsubsection{Pandas}
-Text
+Pandas is an open source data manipulation and analysis library for Python \citep{pandasPy63:online}. Pandas was used for loading in the dataset to the artefact, performing some initial pre-processing, like dropping any patient data from the dataset, to remove bloat. Pandas was also used to store and handle the dataset throughout the artefact, using pandas DataFrames, a two dimensional data structure to store tabular data, like the datasets labels.
+
+In this project, pandas 1.3.5 was used and is a hard requirement to run the artefact.
 
 \subsubsection{Numpy}
 Text
