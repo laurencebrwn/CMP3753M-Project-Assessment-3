@@ -26,7 +26,27 @@ The following sections introduce the software used to complete this research pro
 \phantomsection
 
 \subsubsection{Python}
-Python was the chosen language for this project, due to a number for reasons. Firstly Python is the most popular programming language worldwide, with a 27.95\% market share, according to the PYPL index \citep{PYPLPopu3:online}. This means not only is it well known by computer and data scientists, it is also well supported by both its richness of available libraries and its documentation. Its popularity directly influences its choice for project, by allowing others to pick up and further improve on findings from this research. Other languages in the PYPL list, such as Java, JavaScript and C\# also have a large community and wide documentation, however there are still other factors that set Python apart from these, making it the final choice. 
+Python was the chosen language for this project, due to a number for reasons. Firstly Python is the most popular programming language worldwide, with a 27.85 \% market share, according to the PYPL index \citep{PYPLPopu3:online}. This means not only is it well known by computer and data scientists, it is also well supported by both its richness of available libraries and its documentation. Its popularity directly influences its choice for project, by allowing others to pick up and further improve on findings from this research. Other languages in the PYPL list, such as Java, JavaScript and C\# also have a large community and wide documentation, however there are still other factors that set Python apart from these, making it the final choice. 
+
+\begin{table}[h]
+    \caption{PYPL Worldwide Index, May 2022 \citep{PYPLPopu3:online}.}
+    \centering
+    \begin{tabular}{c|l|r}
+        Rank & Language & Share \\
+        \hline\hline
+        1 & Python & 27.85\% \\
+        2 & Java & 17.86\% \\
+        3 & JavaScript & 9.17\% \\
+        4 & C\# & 7.62\% \\
+        5 & C/C++ & 7.0\% \\
+        6 & PHP & 5.36\% \\
+        7 & R & 4.34\% \\
+        8 & TypeScript & 2.39\% \\
+        9 & Objective-C & 2.25\% \\
+        10 & Swift & 2.05\% \\
+    \end{tabular}
+    \label{tbl:PYPL-table}
+\end{table}
 
 Python's availability of libraries is also a direct influence of choice for this project, as the majority of machine learning and deep learning libraries are supported by Python, such as TensorFlow, PyTorch and Scikit-Learn, with its dominance expected to remain for the foreseeable future \citep{raschka2020machine}. This is compared to libraries like DeepLearning4j, a deep learning library for Java, which, while comparable to the Python libraries, has a declining use within the medical field \citep{erickson2017toolkits}. 
 
@@ -76,13 +96,14 @@ Google Cloud Platform was used in this project to train and test the initial sel
 Google Cloud Platform and its subsidiary solutions are not a requirement to run the artefact.
 
 \subsubsection{Google Colab - Development Environment}
-Text
+Google Colaboratory (Colab) is an online Jupyter notebook style Python development environment designed for machine learning and data analysis \citep{GoogleCo52:online}. Colab is equipped with pre-installed data manipulation and machine learning libraries, including all those used in this project, and provides access to fast computing resources like GPUs. This makes developing and executing machine learning experiments, like this project, accessible and fast, with the ability to share to other researchers. This development environment was used for the initial building of all models, and the final evaluation of the best models found. One downside, however, is the fact that computing resources are not guaranteed, meaning that if demand for resources is high, or a notebook has been running for particularly long, then there is a possibility that it might be terminated.  
 
-\subsubsection{Jupyter Notebook - Development Environment}
-Text
+Google Colab is not a requirement to run the artefact, however a Jupyter notebook solution, like this, must be used.
 
 \subsubsection{GitHub}
-Text
+GitHub is an online Git version control software offering source code management and internet hosting for projects. In this project GitHub was used as both a version control software and a code hosting tool, to ensure there was a backup of all code, for each version authored, and for seamless transfers between Google Cloud Platform and Google Colab.
+
+GitHub is not a requirement to run the artefact, however can been used to access the project files.
 
 \subsection{Hardware Requirements}
 While TensorFlow can run on a large number of devices, there are some hardware limitations, especially if a Graphical Processing Unit (GPU) is used to accelerate performance. TensorFlow requires a CPU capable of AVX instructions, which most modern Computational Processing Unit's (CPU) support \citep{InstallT17:online}. If GPU acceleration is required and the device used has an NVIDIA GPU, then it must support compute unified device architecture (CUDA), a "parallel computing platform" which can "dramatically speed up computing applications by harnessing the power of GPUs" \citep{CUDAZone2:online}. If the device has a GPU that does not support CUDA, but does support DirectX 12 (e.g. an AMD GPU manufactured in the last several years), then Microsoft's DirectML can be used enable GPU support for TensorFlow \citep{Introduc93:online}. Precautions must be taken if DirectML is used however, as it has differing version requirements of Python, TensorFlow and NumPy.
