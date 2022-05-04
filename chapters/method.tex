@@ -1,11 +1,12 @@
 \section{Project Management}
+\subsection{Methodology}
 To effectively manage time within this project of large nature and short time frame, several project management methodologies and principals were implemented. In order to select the correct approach to incorporate project management into this project, methodologies were chosen based on the projects needs. Time within the project needed to be allocated towards both theoretical and technical research, to select the technologies to be used, models for evaluation and to learn how to use the technologies to implement them. As well as this, time should also be invested into the implementation and training of the models used in this evaluation, this will ensure fair and accurate results, and ample time to perform training. The selected methodology should also allow for flexibility, if issues arise or any risks identified occur, the project can remain on track.
 
 A kanban style approach was the selected project management methodology that met the above needs. The kanban approach is an agile methodology which divides a project into work items, which are then represented on a kanban board, splitting the work items into three categories: to do, in progress and complete. This is used along side its four agile inspired principles: visualise workflow, limit work in progress, focus on flow and continuous improvement. Using this approach means that project members are only ever focused on work in progress, meaning that items in the backlog, or to do section, can be re-prioritised and changed without impacting the project, allowing for continuous improvement of the product. Some benefits of kanban, as reported by \cite{ahmad2013kanban}, highlight a better understanding of the entire project process as the visualisation of work items give developers a clear understanding of the projects direction. Kanban's limitation of work in progress items also minimises lead time, with the likes of BBC worldwide reducing time to delivery by 37\% \citep{senapathi2011factors}.
 
 There are some drawbacks to the kanban method however. Most drawbacks identified by \cite{ahmad2013kanban} are related to its difficulty of implementation into pre-existing work cultures and teams. Since this project has a singular developer, these are not applicable. One drawback that this project must be mindful of is introduced by the lack of timing attached to work items, meaning that if not monitored correctly, the project could fall behind schedule due to over focusing on one work item. In order to mitigate these risks, some guidelines from the waterfall methodology were implemented into the project, namely it sequential project structure principle. The reasoning behind this combined approach allows for the limited multitasking and flexibility that kanban introduces combined with the set time planning of waterfall. In the context of this project, it will allow flexibility and adaptability, if the projects priorities change following regular supervisor meetings, or if issues occur. It will also allow constant iteration and improvement of models being evaluated while not being overwhelmed by multitasking.
 
-While abiding by the guiding principles mentioned above, the project will make use of a kanban board for all work items, alongside a waterfall style Gantt chart to pre-plan the entire projects timeline, seen in \ref{fig:gantt-chart}.
+While abiding by the guiding principles mentioned above, the project will make use of a kanban board for all work items, alongside a waterfall style Gantt chart to pre-plan the entire projects timeline, seen in \autoref{fig:gantt-chart}.
 
 \begin{figure}[H]
     \centering
@@ -13,6 +14,23 @@ While abiding by the guiding principles mentioned above, the project will make u
     \caption{Project plan presented as a Gantt chart.}
     \label{fig:gantt-chart}
 \end{figure}
+
+\subsection{Risks}
+During any project, there are always risks that can be encountered and if no mitigation plan is in place, then it can lead to delays in the project. As part of the project management within this project, a full risk assessment was performed and mitigation planned to avoid any lost time. This was integrated into the project management methodology, by allowing for a buffer time within the waterfall plan of the overall project. The risk management table can be seen in \autoref{tbl:risk-table}.
+
+\begin{table}[H]
+    \caption{Risks likely to be encountered during this project.}
+    \centering
+    \begin{tabular}{p{0.22\textwidth}|p{0.11\textwidth}|p{0.14\textwidth}|p{0.41\textwidth}}
+    Risk & Impact & Likelihood & Mitigation\\
+    \hline\hline
+    No availability of suitable training datasets. & High & Medium & While researching which imaging/sound source to use (CT, X-Ray, Acoustic), ensure there is sufficient availability of datasets and dataset size before beginning algorithm development.\\
+    Algorithm requires significant computational performance that cannot be supplied. & Medium & Medium & When researching and selecting which machine learning algorithms will be used for evaluation, take note, and ensure that only resource efficient models are used. This will both mitigate the risk for training and testing the algorithms during this project and reflect hardware requirements of real-world use.\\
+    Algorithm will not function due to   unavailable libraries or hardware requirements. & Medium & High & When selecting which machine learning algorithms will be used for evaluation, check each algorithm’s prerequisite hardware requirements, and ensure they are open source and available for use by all.\\
+    Machine learning techniques or algorithms suddenly becomes closed source and cannot be used. & Medium & Low & Regularly check usage rights of each algorithm and select algorithms open source by nature.\\ 
+    \end{tabular}
+    \label{tbl:risk-table}
+\end{table}
 
 \section{Software Development}
 Software development and the Software Development Life Cycle (SDLC) are important to all software products, solutions and research. The SDLC acts as a guide for the planning, development and delivery of any software focused project, in this case the planning of the problem domain, the development of multiple machine learning models and the delivery of evaluated results as a product of this software.
@@ -30,7 +48,7 @@ The following sections introduce the software used to complete this research pro
 \phantomsection
 
 \subsubsection{Python}
-Python was the chosen language for this project, due to a number for reasons. Firstly Python is the most popular programming language worldwide, with a 27.85 \% market share, according to the PYPL index \citep{PYPLPopu3:online}. This means not only is it well known by computer and data scientists, it is also well supported by both its richness of available libraries and its documentation. Its popularity directly influences its choice for project, by allowing others to pick up and further improve on findings from this research. Other languages in the PYPL list, such as Java, JavaScript and C\# also have a large community and wide documentation, however there are still other factors that set Python apart from these, making it the final choice. 
+Python was the chosen language for this project, due to a number for reasons. Firstly Python is the most popular programming language worldwide, with a 27.85 \% market share, according to the PYPL index \citep{PYPLPopu3:online}, seen in \autoref{tbl:PYPL-table}. This means not only is it well known by computer and data scientists, it is also well supported by both its richness of available libraries and its documentation. Its popularity directly influences its choice for project, by allowing others to pick up and further improve on findings from this research. Other languages in the PYPL list, such as Java, JavaScript and C\# also have a large community and wide documentation, however there are still other factors that set Python apart from these, making it the final choice. 
 
 \begin{table}[H]
     \caption{PYPL Worldwide Index, May 2022 \citep{PYPLPopu3:online}.}
@@ -61,7 +79,7 @@ The entirety of the projects code was written in Python and such is a hard requi
 \subsubsection{TensorFlow - Keras}
 TensorFlow with Keras as the API layer was the chosen machine learning library for this project. TensorFlow is an "end-to-end open source platform for machine learning" with an eager execution environment \citep{TensorFl5:online}. TensorFlow is built upon tensors, which are immutable, multi-dimensional arrays, that are used to store objects, classes and weights that propagate through neural networks. TensorFlow was chosen over other libraries like PyTorch and SciKit-Learn for several reasons, one such reason is due to is eager execution, which means one can view results of operations instantly, as tensors are updated as they are called upon within the code. This allows one to quickly judge the success of a particular model instantly, as it trains, resulting in quick debugging. Another reason for choosing TensorFlow, was its integration with Keras, an API written to run on top of TensorFlow, which makes the creation of machine learning models simple and fast with its sequential model \citep{AboutKer65:online}. The sequential model is a linear stack of layers which allows a user to prototype and build models from scratch, or improve on an existing library of models easily. Keras supplies over 30 pre-trained deep learning models for use within its API, this is a key feature in this project as it allows for accurate replication of the chosen models for evaluation and use of transfer learning in selected models.
 
-TensorFlow and Keras are amongst the most popular machine learning libraries for research studies and business use cases, making both its development support and its applicability in real world use cases beat out competitors. \cite{hale2018deep} ranked each library against each other based on a power score, calculated by the weighted scores of popularity from multiple data sources. 
+TensorFlow and Keras are amongst the most popular machine learning libraries for research studies and business use cases, making both its development support and its applicability in real world use cases beat out competitors. \cite{hale2018deep} ranked each library against each other based on a power score, calculated by the weighted scores of popularity from multiple data sources, seen in \autoref{fig:ml-power-scores}. 
 
 \begin{figure}[H]
     \centering
