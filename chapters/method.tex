@@ -37,7 +37,7 @@ Software development and the Software Development Life Cycle (SDLC) are importan
 
 The kanban approach was again used to guide software development, taking the kanban board and sectioning work items into stages of the SDLC: Backlog, Requirements, Design, Development, Testing, Deployment, Done. Put into context, a model not yet developed or researched, would be placed into the backlog, moving into the requirements section as research into existing implementations and dependencies of the model were carried out. When a model was in the design section, the structure of the model (e.g. hidden layer formatting) was put in place. In development the model would be built within a development environment, tested in the testing section and finally evaluated against the dataset when in the deployment section.
 
-Using this methodology when developing software for this project comes with the same advantages as it does for managing the project. Minimising work in progress means that a focus is on delivering working and evaluated models, while continually measuring and improving the life cycle of development for each model. This continual adaptability and flexibility means that kanban is especially suited to this project and serves towards the test and improve nature of the it.
+Using this methodology when developing software for this project comes with the same advantages as it does for managing the project. Minimising work in progress means that a focus is on delivering working and evaluated models, while continually measuring and improving the life cycle of development for each model. This continual adaptability and flexibility means that kanban is especially suited to this project and serves towards the test and improve nature of it.
 
 \section{Toolsets and Machine Environments}
 There are a number of toolsets used within this projects artefact, both software and hardware related. In order to reproduce the artefact, these must be installed as prerequisites to the project.
@@ -133,6 +133,17 @@ GitHub is not a requirement to run the artefact, however can been used to access
 While TensorFlow can run on a large number of devices, there are some hardware limitations, especially if a Graphical Processing Unit (GPU) is used to accelerate performance. TensorFlow requires a CPU capable of AVX instructions, which most modern Computational Processing Unit's (CPU) support \citep{InstallT17:online}. If GPU acceleration is required and the device used has an NVIDIA GPU, then it must support compute unified device architecture (CUDA), a "parallel computing platform" which can "dramatically speed up computing applications by harnessing the power of GPUs" \citep{CUDAZone2:online}. If the device has a GPU that does not support CUDA, but does support DirectX 12 (e.g. an AMD GPU manufactured in the last several years), then Microsoft's DirectML can be used enable GPU support for TensorFlow \citep{Introduc93:online}. Precautions must be taken if DirectML is used however, as it has differing version requirements of Python, TensorFlow and NumPy.
 
 \section{Research Methods}
+In order to to gather and analyse data collected to evaluate the selected models of this project, a few different research method were carried out and particular testing structures were set in place.
+
+Firstly, the structure in which to gather the primary quantitative data was devised, this ensured an unbiased and fair standard was followed for each model. The structure is detailed throughout the following sections.
+
+\subsubsection{Initial Training}
+All six models were optimised using hyper-parameter tuning using a Google Cloud Platform Vertex AI parallel notebook execution process. This was performed on a small portion of the COVIDx-CXR dataset, meaning that the training time for larger models did not exceed the allotted time for this stage of the project and allotted hardware resources within Google Cloud Platform were not depleted. All models were trained with the same batch size of 32, the same image resolution of 224 x 224
+
+
+
+
+
 You should investigate the types of research methods necessary to validly answer the research questions that your project addresses. You should cite relevant sources to justify your choices.
 \begin{itemize}
     \item abductive
