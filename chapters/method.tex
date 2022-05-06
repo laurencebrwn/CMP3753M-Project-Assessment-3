@@ -98,7 +98,7 @@ In this project, TensorBoard 2.8.0 was used and is a hard requirement to run the
 \subsubsection{Scikit-Learn}
 Scikit-Learn is a machine learning library built for Python, which is bundled with many evaluation functions \citep{33Metric9:online} and cross validation functions \citep{31Crossv34:online}. The evaluation functions used within Scikit-Learn provided accuracy, precision, recall, F1 score and confusion matrix metrics, for each trained model in the project. Scikit-Learn's evaluation functions were chosen over Keras' inbuilt functions as Keras' own evaluation functions are limited to only providing loss and accuracy data\citep{Modeltra48:online}, with other metrics having to be calculated manually, making Scikit-Learn a faster and easier to implement solution. 
 
-Scikit-Learn's Stratified K-Fold cross validation implementation was also used within this project. This is used to ensure fairness when evaluating models performance, by taking an average of each folds validation accuracy', the possibility of dataset or training inconsistencies are removed. Keras offers no in built solution to cross validation, so much like the evaluation metrics, has to be performed manually, making Scikit-Learn a faster and easier to implement solution.
+Scikit-Learn's Stratified K-Fold \citep{sklearnm1:online} cross validation implementation was also used within this project. This is used to ensure fairness when evaluating models performance, by taking an average of each folds validation accuracy', the possibility of dataset or training inconsistencies are removed. Keras offers no in built solution to cross validation, so much like the evaluation metrics, has to be performed manually, making Scikit-Learn a faster and easier to implement solution.
 
 Scikit-Learn was also used to shuffle and re-sample the training data, so that there was no bias towards a particular class or model due to possible bias in the dataset structure.
 
@@ -115,7 +115,7 @@ NumPy is an open source scientific and mathematics library for Python \citep{Num
 In this project, NumPy 1.21.6 was used and is a hard requirement to run the artefact.
 
 \subsubsection{Google Cloud Platform - Development Environment}
-Google Cloud Platform was used in this project to train and test the initial selection of the six COVID-19 classification models and perform hyper-parameter tuning on each model. Two services used within Google Cloud Platform were Vertex AI \citep{VertexAI57:online} and Cloud Storage \citep{CloudSto72:online}. Vertex AI enables fast code building though Vertex AI Workbench, a Jupyter notebook environment with access to server grade GPUs. This enabled quick testing and finalisation of the first round of models for evaluation within this project. Vertex AI also has the ability to execute notebook runs on specific hardware and software instances in parallel, meaning fairness though out the first stages of model evaluation and a fast time to results thanks to the allocated NVIDIA Tesla K80s for each instance. Cloud storage was used to store the COVIDx-CXR database the models were trained on, alongside the saved trained model weights and the TensorBoard logs.
+Google Cloud Platform was used in this project to train and test the initial selection of the six COVID-19 classification models and perform hyper-parameter tuning on each model. Two services used within Google Cloud Platform were Vertex AI \citep{VertexAI57:online} and Cloud Storage \citep{CloudSto72:online}. Vertex AI enables fast code building though Vertex AI Workbench, a Jupyter notebook environment with access to server grade GPUs. This enabled quick testing and finalisation of the first round of models for evaluation within this project. Vertex AI also has the ability to execute notebook runs on specific hardware and software instances in parallel, meaning fairness though out the first stages of model evaluation and a fast training time, due to the allocated NVIDIA Tesla K80s for each instance. Cloud storage was used to store the COVIDx-CXR database the models were trained on, alongside the saved trained model weights and the TensorBoard logs.
 
 Google Cloud Platform and its subsidiary solutions are not a requirement to run the artefact.
 
@@ -137,13 +137,16 @@ Maybe introduce research as inductive, that the data collected would be primary,
 
 In order to to gather and analyse data collected to evaluate the selected models of this project, a few different research method were carried out and particular testing structures were set in place.
 
-\subsection{Metrics}
-Talk about the metrics: accuracy, precision, recall, f1 score, confusion matrix and training times 
+\subsection{Dataset Organisation}
+The COVIDx-CXR dataset selected for use, discussed in the literature review, contains 30,482 X-Ray images, with the binary classification labels containing 13,992 negative cases and 16,490 positive cases. This slight skew in the labels proportions mean that it could introduce some bias in training. To mitigate this, the dataset should be balanced, using a down sampling method, before training. When performing multi-label classification on the dataset, the split of 8085 normal, 5555 pneumonia and 16490 COVID-19 cases, should also be balanced using the same method
 
-\subsection{Dataset}
-Talk about the datasets size, classes binary and multilabel nature, and the small + large sizes, image size, maybe stratified CV.
+The images within the dataset are also of varying sizes and colour spaces. This could lead to further skewing of results in training, and if the images are particularly large, much slower training times. To combat this, all images should go though a pre-processing stage before being passed to a model for training. Pre-processing should downsample all images to a smaller and equal resolution, an equal colour space, as well as performing random transformations to the image. These transformations, like flipping, rotating and cropping, should mitigate any model bias towards images sharing the same orientation, so in practice an X-Ray image to be evaluated by the model will not be treated differently if its orientation or cropping is not the same as the datasets.
 
-\subsection{Data collection}
+Since the dataset is so large, it would not be feasible to train all models and hyper-parameter variations on the entire dataset. The database was reduced to a smaller size for the initial training and model improvement rounds, discussed below. The small size of the dataset was to be 1500 images, 750 negative cases, 750 positive cases in the case of binary classification, or 500 normal, 500 pneumonia and 500 COVID-19 cases in the case of multi-label classification.
+
+To ensure further fairness in model testing, a cross validation method, stratified K fold, was used in the models training. Stratified K fold splits the dataset up into a defined number of groups and for each fold (iteration) one of those groups is chosen as a validation (test) dataset, while the rest is used as training data. This a new group is chosen for each iteration, until each group has been used as a test dataset. To ensure fairness, stratified K fold also splits the data in a way so that each group contains the same number of images of each class. The results from each fold are then averaged together to produce the validation results from training. This entire process ensures that the entire dataset is tested upon while also accounting for the minor changes in results from each model when trained.
+
+\subsection{Model Training and Data Collection}
 Firstly, the structure in which to gather the primary quantitative data was devised, this ensured an unbiased and fair standard was followed for each model. The structure is detailed throughout the following sections.
 
 \phantomsection
@@ -161,6 +164,9 @@ Finally the best performing model, hyper-parameters and improvements would be tr
 
 \subsubsection{Multi-Label Training}
 Talk about multi=lable training, why (to compare with other literature) and how. Talk about minimal changes to the model, to keep it as close to the origional research as possible.
+
+\subsection{Metrics}
+Talk about the metrics: accuracy, precision, recall, f1 score, confusion matrix and training times 
 
 \subsection{Evaluation methods}
 Talk  about how the metrics were used to compare each model, how a winner should be chose etc etc. using quanititative analysis blah blah of biot first talked about.
