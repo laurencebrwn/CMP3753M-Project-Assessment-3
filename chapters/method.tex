@@ -157,21 +157,59 @@ All six models were optimised using hyper-parameter tuning using a Google Cloud 
 Once each model with each variation of hyper-parameters had been trained, each fold of each model was to be then evaluated on the test dataset, a separate 400 chest X-Ray images. Once the evaluation was performed, the average metrics from the test dataset across the 5 folds of each model were calculated. These metrics would then be used to select the best performing model, with the best hyper-parameters.
 
 \subsubsection{Model Improvements}
-The best performing model and hyper-parameters selected would then go under a trial and error improvements round. Information about model improvements and network formats sourced in the literature review and further research were tested on the model. For each attempted improvement the model would then be evaluated in the same manner as in the initial training, this would go on for several rounds, until the improvements started producing diminishing returns. Once the evaluation was performed on each round of improvements, the average metrics from the test dataset across the 5 folds of each model were calculated. These metrics would then be used to select the best performing model improvements.
+The best performing model and hyper-parameters selected would then go under a trial and error improvements round. Information about model improvements and network formats sourced in the literature review and further research were tested on the model. For each attempted improvement the model would then be evaluated in the same manner as in the initial training, this would go on for several rounds, until the improvements started producing diminishing returns. Once the evaluation was performed on each round of improvements, the average metrics from the test dataset across the 5 folds of each model were calculated. These metrics will then be used to select the best performing model improvements.
 
 \subsubsection{Final Training}
-Finally the best performing model, hyper-parameters and improvements would be trained on both a small portion of the database and the entire database. Detailed metrics of accuracy across each fold for both the validation and test data would be recorded. In order to measure the success of the improvements two additional models of the same architecture would be trained on both a small portion of the database and the entire database. These models would have no improvements and no pre-trained weights (if applicable for the winning model) respectively.
+Finally the best performing model, hyper-parameters and improvements will be trained on both a small portion of the database and the entire database. Detailed metrics of accuracy across each fold for both the validation and test data would be recorded. In order to measure the success of the improvements two additional models of the same architecture will be trained on both a small portion of the database and the entire database. These models will have no improvements and no pre-trained weights (if applicable for the winning model) respectively.
 
 \subsubsection{Multi-Label Training}
-Talk about multi=lable training, why (to compare with other literature) and how. Talk about minimal changes to the model, to keep it as close to the origional research as possible.
+The best model, hyper-parameters and improvements, as well as the base model with no improvements will also be trained on both a small portion of the multi-label database and the entire multi-label database. Detailed metrics of accuracy across each fold for both the validation and test data will be recorded. These metrics can then be used to compare the models developed in this study to other similar studies identified in the literature review. This will help gauge how well the models have performed relative to other studies.
 
 \subsection{Metrics}
-Talk about the metrics: accuracy, precision, recall, f1 score, confusion matrix and training times 
+In order to measure the performance of the models and their various iterations, several performance metrics were recorded. The following is a list of metrics and their definitions. Note that $TP$ is equal to true positives, $TN$ is equal to true negatives, $FP$ is equal to false positives and $FN$ is equal to false negatives.
+
+The first, accuracy, the fraction of correct predictions over the total number of samples, is the key metric used to distinguish each model and variations performance. In this case, the best value is 1 and the worst is 0. The definition of accuracy can be seen in Equation 3.1.
+
+\begin{align}
+\text{accuracy}= \frac{TP+TN}{TP+TN+FP+FN}
+\end{align}
+
+Secondly, precision, measures the models ability not to classify a negative sample as positive, and is used to measure the likelihood a model will return a false positive. In this case, the best value is 1 and the worst is 0. The definition of accuracy can be seen in Equation 3.2.
+
+\begin{align}
+\text{precision}= \frac{TP}{TP+FP}
+\end{align}
+
+Thirdly, recall, measures the ability of a model to correctly classify, or find, all of the positive samples, where the best value is 1 and the worst is 0. The definition of accuracy can be seen in Equation 3.3.
+
+\begin{align}
+\text{recall}= \frac{TP}{TP+FN}
+\end{align}
+
+Fourth, F1 score, is the harmonic mean of the precision and recall. This shows the models ability of how accurate each of its positive predictions are. In this case, the best value is 1 and the worst is 0. The definition of accuracy can be seen in Equation 3.4.
+
+\begin{align}
+\text{F1 score}= 2 \times \frac{precision \times recall}{precision + recall}
+\end{align}
+
+The fifth metric recorded was the confusion matrix. A table classifying all of the predictions of the model into the respective $TP$, $TN$, $FP$ and $FN$ values. A demonstration of which can be seen in \autoref{tbl:confusion-matrix-table}.
+
+\begin{table}[H]
+    \caption{A confusion matrix.}
+    \centering
+    \begin{tabular}{cccc}
+     &  & \multicolumn{2}{c}{True Class} \\ \cline{3-4} 
+     & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{Positive} & \multicolumn{1}{c|}{Negative} \\ \cline{2-4} 
+    \multicolumn{1}{c|}{\multirow{2}{*}{\rotatebox[origin=c]{90}{\makecell{Predicted \\ Class}}}} & \multicolumn{1}{c|}{Positive} & \multicolumn{1}{c|}{TP} & \multicolumn{1}{c|}{FP} \\ \cline{2-4} 
+    \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{Negative} & \multicolumn{1}{c|}{FN} & \multicolumn{1}{c|}{TP} \\ \cline{2-4} 
+    \end{tabular}
+    \label{tbl:confusion-matrix-table}
+\end{table}
+
+Talk about the metrics: accuracy, precision, recall, F1 score, confusion matrix and training times 
 
 \subsection{Evaluation methods}
 Talk  about how the metrics were used to compare each model, how a winner should be chose etc etc. using quanititative analysis blah blah of biot first talked about.
-
-
 
 
 You should investigate the types of research methods necessary to validly answer the research questions that your project addresses. You should cite relevant sources to justify your choices.
