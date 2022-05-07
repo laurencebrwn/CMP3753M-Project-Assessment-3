@@ -40,13 +40,22 @@ The kanban approach was again used to guide software development, taking the kan
 Using this methodology when developing software for this project comes with the same advantages as it does for managing the project. Minimising work in progress means that a focus is on delivering working and evaluated models, while continually measuring and improving the life cycle of development for each model. This continual adaptability and flexibility means that kanban is especially suited to this project and serves towards the test and improve nature of it.
 
 \section{Toolsets and Machine Environments}
-There are a number of toolsets used within this projects artefact, both software and hardware related. In order to reproduce the artefact, these must be installed as prerequisites to the project.
+There are a number of toolsets used within this projects artefact, both project management, software and hardware related. This section discusses and justifies the toolsets and machine environments used in this study.
 
-\subsection{Software Requirements}
-The following sections introduce the software used to complete this research project. While some software, like the development environments and visualisation software like TensorBoard are optional and are not needed to train the models, some modification to the code might be needed to run without them.
+\subsection{Project Management Software}
+In order to facilitate the kanban style management of the project, there are several different solutions that could be used. Popular kanban board tools include Trello \citep{Trello41:online}, monday.com \citep{mondayco9:online} and GitHub Project Boards \citep{Aboutpro84:online}. While all share the same basic feature sets, for example, customising board sections and categorisation of work items, simplicity is a key requirement for a solo study like this one. Trello boasts the most simple set up and usage of all three tools, with an easy and instant set up, and on-the-go customisation. Trello was the selected tool for the kanban board management of the SDLC, a snapshot of which can be seen in \autoref{fig:trello}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/trello.png}
+    \caption{SDLC within Trello.}
+    \label{fig:trello}
+\end{figure}
+
+\subsection{Software Toolsets and Development Enviroments}
+The following sections introduce the software and development environments used to complete this research project.
 
 \phantomsection
-
 \subsubsection{Python}
 Python was the chosen language for this project, due to a number for reasons. Firstly Python is the most popular programming language worldwide, with a 27.85 \% market share, according to the PYPL index \citep{PYPLPopu3:online}, seen in \autoref{tbl:PYPL-table}. This means not only is it well known by computer and data scientists, it is also well supported by both its richness of available libraries and its documentation. Its popularity directly influences its choice for project, by allowing others to pick up and further improve on findings from this research. Other languages in the PYPL list, such as Java, JavaScript and C\# also have a large community and wide documentation, however there are still other factors that set Python apart from these, making it the final choice. 
 
@@ -74,8 +83,6 @@ Python's availability of libraries is also a direct influence of choice for this
 
 Finally Python has a very natural syntax which is very close to the English language, making it very readable, even by those with no prior knowledge of the language, compared to the likes of Java and C\# \citep{srinath2017python}.
 
-The entirety of the projects code was written in Python and such is a hard requirement to run the projects artefact. It is recommended to use Python 3.7 or later for TensorFlow support.
-
 \subsubsection{TensorFlow - Keras}
 TensorFlow with Keras as the API layer was the chosen machine learning library for this project. TensorFlow is an "end-to-end open source platform for machine learning" with an eager execution environment \citep{TensorFl5:online}. TensorFlow is built upon tensors, which are immutable, multi-dimensional arrays, that are used to store objects, classes and weights that propagate through neural networks. TensorFlow was chosen over other libraries like PyTorch and SciKit-Learn for several reasons, one such reason is due to is eager execution, which means one can view results of operations instantly, as tensors are updated as they are called upon within the code. This allows one to quickly judge the success of a particular model instantly, as it trains, resulting in quick debugging. Another reason for choosing TensorFlow, was its integration with Keras, an API written to run on top of TensorFlow, which makes the creation of machine learning models simple and fast with its sequential model \citep{AboutKer65:online}. The sequential model is a linear stack of layers which allows a user to prototype and build models from scratch, or improve on an existing library of models easily. Keras supplies over 30 pre-trained deep learning models for use within its API, this is a key feature in this project as it allows for accurate replication of the chosen models for evaluation and use of transfer learning in selected models.
 
@@ -88,12 +95,8 @@ TensorFlow and Keras are amongst the most popular machine learning libraries for
     \label{fig:ml-power-scores}
 \end{figure}
 
-The TensorFlow and Keras are used in the entirety of this project and such is a hard requirement to run the artefact. It is recommended to use TensorFlow 2.0 and Keras 2.0 or later, but with some code modifications, TensorFlow 1.0+ and Keras 1.0+ can also be used.
-
 \subsubsection{TensorBoard}
 TensorBoard is a visualisation library for TensorFlow, that tracks and plots metrics from TensorFlow models as they train \citep{TensorBo28:online}. Within this project, TensorBoard was used to both extract visual data of the models performs, like accuracy and loss metrics, as well as tracking weather a particular model was over/under fitting. TensorBoard was chosen over other visualisation libraries like Matplotlib or seaborn due to it's tight integration with TensorFlow, and interactivity. TensorBoard also allows one to implement and track hyper-parameter tuning within a project, this was extremely beneficial for this project.
-
-In this project, TensorBoard 2.8.0 was used and is a hard requirement to run the artefact. As with TensorFlow, it is recommended to use TensorBoard 2.0 or later, but with some code modifications, TensorBoard 1.0+ can also be used.
 
 \subsubsection{Scikit-Learn}
 Scikit-Learn is a machine learning library built for Python, which is bundled with many evaluation functions \citep{33Metric9:online} and cross validation functions \citep{31Crossv34:online}. The evaluation functions used within Scikit-Learn provided accuracy, precision, recall, F1 score and confusion matrix metrics, for each trained model in the project. Scikit-Learn's evaluation functions were chosen over Keras' inbuilt functions as Keras' own evaluation functions are limited to only providing loss and accuracy data\citep{Modeltra48:online}, with other metrics having to be calculated manually, making Scikit-Learn a faster and easier to implement solution. 
@@ -102,45 +105,30 @@ Scikit-Learn's Stratified K-Fold \citep{sklearnm1:online} cross validation imple
 
 Scikit-Learn was also used to shuffle and re-sample the training data, so that there was no bias towards a particular class or model due to possible bias in the dataset structure.
 
-In this project, Scikit-Learn 1.0.2 was used and is a hard requirement to run the artefact.
-
 \subsubsection{Pandas}
 Pandas is an open source data manipulation and analysis library for Python \citep{pandasPy63:online}. Pandas was used for loading in the dataset to the artefact, performing some initial pre-processing, like dropping any patient data from the dataset, to remove bloat. Pandas was also used to store and handle the dataset throughout the artefact, using pandas DataFrames, a two dimensional data structure to store tabular data, like the datasets labels.
 
-In this project, pandas 1.3.5 was used and is a hard requirement to run the artefact.
-
 \subsubsection{NumPy}
-NumPy is an open source scientific and mathematics library for Python \citep{NumPy90:online}. NumPy was used for basic numerical operations within the project, and is also a dependency for other libraries used. 
-
-In this project, NumPy 1.21.6 was used and is a hard requirement to run the artefact.
+NumPy is an open source scientific and mathematics library for Python \citep{NumPy90:online}. NumPy was used for basic numerical operations within the project, and is also a dependency for other libraries used.
 
 \subsubsection{Google Cloud Platform - Development Environment}
 Google Cloud Platform was used in this project to train and test the initial selection of the six COVID-19 classification models and perform hyper-parameter tuning on each model. Two services used within Google Cloud Platform were Vertex AI \citep{VertexAI57:online} and Cloud Storage \citep{CloudSto72:online}. Vertex AI enables fast code building though Vertex AI Workbench, a Jupyter notebook environment with access to server grade GPUs. This enabled quick testing and finalisation of the first round of models for evaluation within this project. Vertex AI also has the ability to execute notebook runs on specific hardware and software instances in parallel, meaning fairness though out the first stages of model evaluation and a fast training time, due to the allocated NVIDIA Tesla K80s for each instance. Cloud storage was used to store the COVIDx-CXR database the models were trained on, alongside the saved trained model weights and the TensorBoard logs.
 
-Google Cloud Platform and its subsidiary solutions are not a requirement to run the artefact.
-
 \subsubsection{Google Colab - Development Environment}
-Google Colaboratory (Colab) is an online Jupyter notebook style Python development environment designed for machine learning and data analysis \citep{GoogleCo52:online}. Colab is equipped with pre-installed data manipulation and machine learning libraries, including all those used in this project, and provides access to fast computing resources like GPUs. This makes developing and executing machine learning experiments, like this project, accessible and fast, with the ability to share to other researchers. This development environment was used for the initial building of all models, and the final evaluation of the best models found. One downside, however, is the fact that computing resources are not guaranteed, meaning that if demand for resources is high, or a notebook has been running for particularly long, then there is a possibility that it might be terminated.  
-
-Google Colab is not a requirement to run the artefact, however a Jupyter notebook solution, like this, must be used.
+Google Colaboratory (Colab) is an online Jupyter notebook style Python development environment designed for machine learning and data analysis \citep{GoogleCo52:online}. Colab is equipped with pre-installed data manipulation and machine learning libraries, including all those used in this project, and provides access to fast computing resources like GPUs. This makes developing and executing machine learning experiments, like this project, accessible and fast, with the ability to share to other researchers. This development environment was used for the initial building of all models, and the final evaluation of the best models found. One downside, however, is the fact that computing resources are not guaranteed, meaning that if demand for resources is high, or a notebook has been running for particularly long, then there is a possibility that it might be terminated.
 
 \subsubsection{GitHub}
 GitHub is an online Git version control software offering source code management and internet hosting for projects. In this project GitHub was used as both a version control software and a code hosting tool, to ensure there was a backup of all code, for each version authored, and for seamless transfers between Google Cloud Platform and Google Colab.
 
-GitHub is not a requirement to run the artefact, however can been used to access the project files.
-
-\subsection{Hardware Requirements}
-While TensorFlow can run on a large number of devices, there are some hardware limitations, especially if a Graphical Processing Unit (GPU) is used to accelerate performance. TensorFlow requires a CPU capable of AVX instructions, which most modern Computational Processing Unit's (CPU) support \citep{InstallT17:online}. If GPU acceleration is required and the device used has an NVIDIA GPU, then it must support compute unified device architecture (CUDA), a "parallel computing platform" which can "dramatically speed up computing applications by harnessing the power of GPUs" \citep{CUDAZone2:online}. If the device has a GPU that does not support CUDA, but does support DirectX 12 (e.g. an AMD GPU manufactured in the last several years), then Microsoft's DirectML can be used enable GPU support for TensorFlow \citep{Introduc93:online}. Precautions must be taken if DirectML is used however, as it has differing version requirements of Python, TensorFlow and NumPy.
-
 \section{Research Methods}
-Maybe introduce research as inductive, that the data collected would be primary, but later on compared with other literature (Secondary), and how it would be quantitative analysis.
+In order to to gather and analyse data collected to evaluate the selected models of this project, a few different research methods were used. This project takes an inductive approach towards the research process, by making observations and recording results of models performance and proposing theories and explanations for why particular models may perform better from the collected data \citep{saunders2009research}. The analysis of data collected in this project is quantitative, the full list of which is detailed later in this section. Using quantitative analysis allows for statistical analysis of results such that decisions and recommendations can be verified and evaluated by the data collected \citep{saunders2009research}. The majority of this study makes use of primary data collected, as the main strategy of data collection is the experiment (training and analysing the models) \citep{hox2005data}. However to position the results amongst other studies and justify findings some comparisons will be drawn between other studies identified in the literature review, using secondary data. Primary data collected should take an ratio form, with data being able to be ranked, with set intervals, for example a percent between accuracy score, and a true zero point, for example a 0 accuracy score means an absolute lack in classification ability. Results will be represented in a combination of graphical and tabular form, depending on the metric and ease of comparability. 
 
-In order to to gather and analyse data collected to evaluate the selected models of this project, a few different research method were carried out and particular testing structures were set in place.
+Now that the methods of research in this project are defined, a strategy of collecting and formatting the quantitative primary data is required. The following sections detail how the research was carried out and the particular testing structures that were set in place.
 
 \subsection{Dataset Organisation}
 The COVIDx-CXR dataset selected for use, discussed in the literature review, contains 30,482 X-Ray images, with the binary classification labels containing 13,992 negative cases and 16,490 positive cases. This slight skew in the labels proportions mean that it could introduce some bias in training. To mitigate this, the dataset should be balanced, using a down sampling method, before training. When performing multi-label classification on the dataset, the split of 8085 normal, 5555 pneumonia and 16490 COVID-19 cases, should also be balanced using the same method
 
-The images within the dataset are also of varying sizes and colour spaces. This could lead to further skewing of results in training, and if the images are particularly large, much slower training times. To combat this, all images should go though a pre-processing stage before being passed to a model for training. Pre-processing should downsample all images to a smaller and equal resolution, an equal colour space, as well as performing random transformations to the image. These transformations, like flipping, rotating and cropping, should mitigate any model bias towards images sharing the same orientation, so in practice an X-Ray image to be evaluated by the model will not be treated differently if its orientation or cropping is not the same as the datasets.
+The images within the dataset are also of varying sizes and colour spaces. This could lead to further skewing of results in training, and if the images are particularly large, much slower training times. To combat this, all images should go though a pre-processing stage before being passed to a model for training. Pre-processing should down-sample all images to a smaller and equal resolution, an equal colour space, as well as performing random transformations to the image. These transformations, like flipping, rotating and cropping, should mitigate any model bias towards images sharing the same orientation, so in practice an X-Ray image to be evaluated by the model will not be treated differently if its orientation or cropping is not the same as the datasets.
 
 Since the dataset is so large, it would not be feasible to train all models and hyper-parameter variations on the entire dataset. The database was reduced to a smaller size for the initial training and model improvement rounds, discussed below. The small size of the dataset was to be 1500 images, 750 negative cases, 750 positive cases in the case of binary classification, or 500 normal, 500 pneumonia and 500 COVID-19 cases in the case of multi-label classification.
 
@@ -206,15 +194,4 @@ The fifth metric recorded was the confusion matrix. A table classifying all of t
     \label{tbl:confusion-matrix-table}
 \end{table}
 
-Talk about the metrics: accuracy, precision, recall, F1 score, confusion matrix and training times 
-
-\subsection{Evaluation methods}
-Talk  about how the metrics were used to compare each model, how a winner should be chose etc etc. using quanititative analysis blah blah of biot first talked about.
-
-
-You should investigate the types of research methods necessary to validly answer the research questions that your project addresses. You should cite relevant sources to justify your choices.
-\begin{itemize}
-    \item Inductive
-    \item primary data
-    
-\end{itemize}
+Finally the training time and number of trainable parameters for each model was also recorded, this is classified as the time it takes a model to train on test data and perform validation, it does not include test data evaluation time. This shows both the models speed, but also size, with larger models taking longer to train.
