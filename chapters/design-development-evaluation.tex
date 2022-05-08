@@ -37,6 +37,35 @@ The dataset used to train the image classification models is a hard requirement 
 While TensorFlow can run on a large number of devices, there are some hardware limitations, especially if a Graphical Processing Unit (GPU) is used to accelerate performance. TensorFlow requires a CPU capable of AVX instructions, which most modern Computational Processing Unit's (CPU) support \citep{InstallT17:online}. If GPU acceleration is required and the device used has an NVIDIA GPU, then it must support compute unified device architecture (CUDA), a "parallel computing platform" which can "dramatically speed up computing applications by harnessing the power of GPUs" \citep{CUDAZone2:online}. If the device has a GPU that does not support CUDA, but does support DirectX 12 (e.g. an AMD GPU manufactured in the last several years), then Microsoft's DirectML can be used enable GPU support for TensorFlow \citep{Introduc93:online}. Precautions must be taken if DirectML is used however, as it has differing version requirements of Python, TensorFlow and NumPy.
 
 \section{Design}
+In order to design the software that would train and evaluate each of the selected models, identified in the literature review, prompts were taken from the methodology to devise a structure that would form each models notebook. While there are a few variations for each model a theme was followed for all models:
+
+\begin{enumerate}
+    \item Define the model variables, like the image size, batch size, dataset size, number of K folds and maximum amount of epochs.
+    \item Import the required libraries, like TensorFlow, Keras, Scikit-Learn, etc.
+    \item Define the hyper-parameters of the model (or list of hyper-parameters if performing tuning).
+    \item Prepare the dataset.
+    \begin{enumerate}
+        \item Read in the label files for both test and train.
+        \item Down-sample each class to match the total dataset size and to ensure all classes are equally represented.
+        \item Shuffle the data.
+        \item Pre-process the X-Ray images (and perform image transformations on the training dataset).
+        \item Split the training data into folds for stratified K fold cross validation.
+    \end{enumerate}
+    \item Create the machine learning model.
+    \begin{enumerate}
+        \item Create the Keras sequential model.
+        \item If the model is using transfer learning (Xception, ResNet and DenseNet), fetch the base model from Keras' application library.
+        \item Define the model layers in the sequential model.
+        \item Set any hyper-parameters, like the optimiser, learning rate etc.
+        \item Compile the model.
+    \end{enumerate}
+    \item Begin cross validation training.
+    \begin{enumerate}
+        \item 
+    \end{enumerate}
+\end{enumerate}
+
+
 
 \section{Building and Programming the Artefact}
 
