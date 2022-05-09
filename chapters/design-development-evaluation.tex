@@ -37,12 +37,12 @@ The dataset used to train the image classification models is a hard requirement 
 While TensorFlow can run on a large number of devices, there are some hardware limitations, especially if a Graphical Processing Unit (GPU) is used to accelerate performance. TensorFlow requires a CPU capable of AVX instructions, which most modern Computational Processing Unit's (CPU) support \citep{InstallT17:online}. If GPU acceleration is required and the device used has an NVIDIA GPU, then it must support compute unified device architecture (CUDA), a "parallel computing platform" which can "dramatically speed up computing applications by harnessing the power of GPUs" \citep{CUDAZone2:online}. If the device has a GPU that does not support CUDA, but does support DirectX 12 (e.g. an AMD GPU manufactured in the last several years), then Microsoft's DirectML can be used enable GPU support for TensorFlow \citep{Introduc93:online}. Precautions must be taken if DirectML is used however, as it has differing version requirements of Python, TensorFlow and NumPy.
 
 \section{Design}
-In order to design the software that would train and evaluate each of the selected models, identified in the literature review, prompts were taken from the methodology to devise a structure that would form each models notebook. While there are a few variations for each model a common format was followed for all models:
+In order to design the software that would train and evaluate each of the selected models, identified in the literature review, prompts were taken from the methodology to devise a structure that would form each models notebook. By implementing a general structure that all models would inherit, it made changes to the models, hyper parameters easy, while reducing development time. While there are a few variations for each model a common format was followed for all models:
 
 \begin{enumerate}
     \item Set up the environment.
     \begin{enumerate}
-        \item Define the model variables, like the image size, batch size, dataset size, number of K folds and maximum amount of epochs.
+        \item Define the model and training variables.
         \item Import the required libraries, like TensorFlow, Keras, Scikit-Learn, etc.
         \item Define the hyper-parameters of the model (or list of hyper-parameters if performing tuning).
     \end{enumerate}
@@ -84,8 +84,65 @@ In order to design the software that would train and evaluate each of the select
 Developing the Python notebooks for each model followed a similar flow to that listed in the design section. Firstly the Environment set up was developed, followed by dataset preparation and pre-processing. Where the development flow differed was that the cross validation training and evaluation sections were developed before the model itself. This meant a skeletal structure consisting of everything except for the model itself could be replicated, once for each model. This section will detail the development via a run through of the code itself, split into the sections listed in the flow above.
 
 \subsection{Environment Set Up}
+Firstly the correct environment had to be set up before any machine learning models were created or training was to happen. This started with defining the image size, batch size, dataset size, number of K folds, the maximum amount of epochs and the path to the dataset. Secondly all the required libraries were imported. This included NumPy, pandas, TensorFlow, Scikit-Learn, TensorBoard and other generic Python libraries like those used to record the time. Finally the hyper-parameters were instantiated. This was done using TensorBoard's "hparams" plugin. An example of this can be seen in \autoref{fig:hyper-param-code}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/hyper-param-code.png}
+    \caption{Defining the hyper-parameters with TensorBoard.}
+    \label{fig:hyper-param-code}
+\end{figure}
+
+\subsection{Dataset Preparation}
+Next the COVIDx-CXR dataset had to be brought in, and manipulated such that the models could use it for training. To begin, the dataset labels were read in, and unnecessary columns, like "patient id" and "data source" were removed. Next the data was down-sampled, such that the classes were of equal proportions, and thoroughly shuffled. This was done with Scikit-Learns "resample" function, an example of this can be seen in \autoref{fig:dataset-downsampling}. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/dataset-downsampling.png}
+    \caption{Down-sampling and shuffling the dataset.}
+    \label{fig:dataset-downsampling}
+\end{figure}
+
+The dataset labels then had to be linked with the corresponding images. This was done with Keras' "ImageDataGenerator". Using "ImageDataGenerator" allowed for the use of the "flow\_from\_dataframe()" function, which matches up the image paths, stored in a DataFrame, to the images themselves. It also allowed for image pre-processing to be performed serially, each time an image was flowed from the DataFrame. While the image pre-processing remained mostly constant for each model, some models, like Xception, ResNet and DenseNet, each had a specific pre-processing, created for that model, by Keras. Pre-processing the training images also took a different form from the test images, as the data had to be split into training and validation folds, dictated by the stratified K fold implementation. A separate function was made for this purpose, an example of which, used for the Xception model, can be seen in \autoref{fig:image-preprocessing}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/image-preprocessing.png}
+    \caption{Down-sampling and shuffling the dataset.}
+    \label{fig:image-preprocessing}
+\end{figure}
+
+\subsection{Creating the Models}
+
+\phantomsection
+\subsubsection{AlexNet}
+
+
+\subsubsection{DenseNet201}
+
+
+\subsubsection{ResNet50V2}
+
+
+\subsubsection{SqueezeNet}
+
+
+\subsubsection{Xception}
+
+
+\subsubsection{ConvNet}
+
+
+\subsection{Cross Validation Training}
+
+
+\subsection{Model Evaluation}
 
 
 \section{Operation of Artefact}
 
-\section{Results}
+\section{Initial Results}
+
+\section{Model Improvements}
+
+\Section{Final Results}
