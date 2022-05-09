@@ -37,12 +37,15 @@ The dataset used to train the image classification models is a hard requirement 
 While TensorFlow can run on a large number of devices, there are some hardware limitations, especially if a Graphical Processing Unit (GPU) is used to accelerate performance. TensorFlow requires a CPU capable of AVX instructions, which most modern Computational Processing Unit's (CPU) support \citep{InstallT17:online}. If GPU acceleration is required and the device used has an NVIDIA GPU, then it must support compute unified device architecture (CUDA), a "parallel computing platform" which can "dramatically speed up computing applications by harnessing the power of GPUs" \citep{CUDAZone2:online}. If the device has a GPU that does not support CUDA, but does support DirectX 12 (e.g. an AMD GPU manufactured in the last several years), then Microsoft's DirectML can be used enable GPU support for TensorFlow \citep{Introduc93:online}. Precautions must be taken if DirectML is used however, as it has differing version requirements of Python, TensorFlow and NumPy.
 
 \section{Design}
-In order to design the software that would train and evaluate each of the selected models, identified in the literature review, prompts were taken from the methodology to devise a structure that would form each models notebook. While there are a few variations for each model a theme was followed for all models:
+In order to design the software that would train and evaluate each of the selected models, identified in the literature review, prompts were taken from the methodology to devise a structure that would form each models notebook. While there are a few variations for each model a common format was followed for all models:
 
 \begin{enumerate}
-    \item Define the model variables, like the image size, batch size, dataset size, number of K folds and maximum amount of epochs.
-    \item Import the required libraries, like TensorFlow, Keras, Scikit-Learn, etc.
-    \item Define the hyper-parameters of the model (or list of hyper-parameters if performing tuning).
+    \item Set up the environment.
+    \begin{enumerate}
+        \item Define the model variables, like the image size, batch size, dataset size, number of K folds and maximum amount of epochs.
+        \item Import the required libraries, like TensorFlow, Keras, Scikit-Learn, etc.
+        \item Define the hyper-parameters of the model (or list of hyper-parameters if performing tuning).
+    \end{enumerate}
     \item Prepare the dataset.
     \begin{enumerate}
         \item Read in the label files for both test and train.
@@ -61,13 +64,27 @@ In order to design the software that would train and evaluate each of the select
     \end{enumerate}
     \item Begin cross validation training.
     \begin{enumerate}
-        \item 
+        \item Iterate through hyper-parameter variations.
+        \item Iterate through stratified K folds.
+        \item Train the model.
+        \item Record model logs.
+        \item Save the model weights.
+    \end{enumerate}
+    \item Evaluate the model.
+    \begin{enumerate}
+        \item Iterate through the trained models.
+        \item Load model weights.
+        \item Predict the labels on the test dataset.
+        \item Record the models key metrics, described in the methodology.
+        \item Save the models metrics and performance
     \end{enumerate}
 \end{enumerate}
 
+\section{Developing the Artefact}
+Developing the Python notebooks for each model followed a similar flow to that listed in the design section. Firstly the Environment set up was developed, followed by dataset preparation and pre-processing. Where the development flow differed was that the cross validation training and evaluation sections were developed before the model itself. This meant a skeletal structure consisting of everything except for the model itself could be replicated, once for each model. This section will detail the development via a run through of the code itself, split into the sections listed in the flow above.
 
+\subsection{Environment Set Up}
 
-\section{Building and Programming the Artefact}
 
 \section{Operation of Artefact}
 
