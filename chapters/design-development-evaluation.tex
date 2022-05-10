@@ -113,10 +113,37 @@ The dataset labels then had to be linked with the corresponding images. This was
 \end{figure}
 
 \subsection{Creating the Models}
+Next each of the six models had to be built, while each models architectures differ, each model uses some or all of the same layers. To understand this better some research was carried out on each layers functions. The following is an explanation for layers used in the models:
+
+\begin{itemize}
+    \item Dense -  A deeply connected neural network layer (all neurons receive inputs from all neurons in the previous layer) performs matrix-vector multiplication, with the values of said matrix being trained and updated with back propagation \citep{Denselay11:online}.
+    \item Conv2D - Creates a convolution kernel that is convolved with the input, in this case an image, or the previous layers output. The result of the kernel produces a tensor of outputs \citep{Conv2Dla69:online}.
+    \item GlovalAveragePooling2D - Down-samples the entire feature map to a single value. In a 2D layer it takes a 4D tensor and returns a 2D tensor with the shape of (batch size, number of channels) \citep{GlobalAv91:online}.
+    \item BatchNormalization - Normalises its inputs by applying a transformation that maintains the outputs mean to as close to 0 as possible and its standard deviation as close to 1 as possible \citep{BatchNor52:online}.
+    \item Dropout - Randomly sets inputs values to 0, at a user defined frequency, to prevent over fitting. Those inputs that are not set to - are scaled so that the total sum of the inputs is unchanged \citep{Dropoutl66:online}.
+    \item Activation - Applies a user defined activation function to the input, while retaining the input shape \citep{Activati33:online}.
+    \item MaxPooling2D - Similar to GlobalAveragePooling 2D, in that it down-samples the entire feature map, but this time takes the maximum value over a user defined input window, known as a pool size \citep{MaxPooli1:online}.
+    \item Flatten - Flattens the input to a 1D shape, while retaining the batch size \citep{Flattenl52:online}.
+\end{itemize}
+
+The models were created inside a create\_model() function which takes the hyper-parameters as an input, and returns the model as an output. Inside the function the Keras sequential or functional API is used to create the model, before defining its optimiser and learning rate, before compiling the model. An example of this, used for the Xception model can be seen in \autoref{fig:xception}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/xception.png}
+    \caption{The create\_model() function structure, used for creating Xception in this case.}
+    \label{fig:xception}
+\end{figure}
+
+While model architecture of the used models are standard, each model has been slightly modified initially for better performance, and to match the correct output specification (ie. number of classes). Each model has a different architecture and layer structure, and the following sections will explain in detail the model architecture for each, including any modifications made.
 
 \phantomsection
 \subsubsection{AlexNet}
+Since Keras has no application model available for AlexNet, it had to be reproduced manually using Keras' sequential API. A description of the architecture, taken from \citep{krizhevsky2012imagenet}, was used for this.
 
+AlexNet consists of 5 Conv2D layers, each of which is followed by a BatchNormalization layer, an Activation layer with a rectified linear activation function (ReLU) and a MaxPooling2D layer, before being passed to the next Conv2D layer. Following this the output is flattened, and passed to 3 Dense layers, each of which is followed by a BatchNormalization layer, an Activation layer with a rectified linear activation function (ReLU) and a Dropout layer. This is finally followed by an output layer, which is a Dense layer with a single output (for binary classification), a BatchNormalization layer and an Activation layer with a sigmoid activation function.
+
+Hyper-parameter tuning involved changing the final Dense layers number of units, all three dense layers dropout values, the optimiser and the learning rate. The full model code can be seen in \autoref{fig:alexnet-part1} and \autoref{fig:alexnet-part2}.
 
 \subsubsection{DenseNet201}
 
@@ -145,4 +172,4 @@ The dataset labels then had to be linked with the corresponding images. This was
 
 \section{Model Improvements}
 
-\Section{Final Results}
+\section{Final Results}
