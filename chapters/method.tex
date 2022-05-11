@@ -134,7 +134,7 @@ Since the dataset is so large, it would not be feasible to train all models and 
 
 To ensure further fairness in model testing, a cross validation method, stratified K fold, was used in the models training. Stratified K fold splits the dataset up into a defined number of groups and for each fold (iteration) one of those groups is chosen as a validation (test) dataset, while the rest is used as training data. This a new group is chosen for each iteration, until each group has been used as a test dataset. To ensure fairness, stratified K fold also splits the data in a way so that each group contains the same number of images of each class. The results from each fold are then averaged together to produce the validation results from training. This entire process ensures that the entire dataset is tested upon while also accounting for the minor changes in results from each model when trained.
 
-\subsection{Model Training and Data Collection}
+\subsection{Model Training and Data Collection} \label{model-training}
 Firstly, the structure in which to gather the primary quantitative data was devised, this ensured an unbiased and fair standard was followed for each model. The structure is detailed throughout the following sections.
 
 \phantomsection

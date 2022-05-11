@@ -1,4 +1,4 @@
-\section{Project Requirements}
+\section{Project Requirements} \label{project-requirements}
 \subsection{Software Requirements}
 In order to reproduce the artefact, software requirements must be installed and hardware requirements must be met as prerequisites to the project. While some software, like the development environments are optional and are not needed to train the models, some modification to the code might be needed to run without them.
 
@@ -103,7 +103,7 @@ Next the COVIDx-CXR dataset had to be brought in, and manipulated such that the 
     \label{fig:dataset-downsampling}
 \end{figure}
 
-The dataset labels then had to be linked with the corresponding images. This was done with Keras' "ImageDataGenerator". Using "ImageDataGenerator" allowed for the use of the "flow\_from\_dataframe()" function, which matches up the image paths, stored in a DataFrame, to the images themselves. It also allowed for image pre-processing to be performed serially, each time an image was flowed from the DataFrame. While the image pre-processing remained mostly constant for each model, some models, like Xception, ResNet and DenseNet, each had a specific pre-processing, created for that model, by Keras. Pre-processing the training images also took a different form from the test images, as the data had to be split into training and validation folds, dictated by the stratified K fold implementation. A separate function was made for this purpose, an example of which, used for the Xception model, can be seen in \autoref{fig:image-preprocessing}.
+The dataset labels then had to be linked with the corresponding images. This was done with Keras' "ImageDataGenerator". Using "ImageDataGenerator" allowed for the use of the "flow\_from\_dataframe()" function, which matches up the image paths, stored in a DataFrame, to the images themselves. It also allowed for image pre-processing to be performed serially, each time an image was flowed from the DataFrame. While the image pre-processing remained mostly constant for each model, some models, like Xception, ResNet50V2 and DenseNet201, each had a specific pre-processing, created for that model, by Keras. Pre-processing the training images also took a different form from the test images, as the data had to be split into training and validation folds, dictated by the stratified K fold implementation. A separate function was made for this purpose, an example of which, used for the Xception model, can be seen in \autoref{fig:image-preprocessing}.
 
 \begin{figure}[H]
     \centering
@@ -118,7 +118,7 @@ Next each of the six models had to be built, while each models architectures dif
 \begin{itemize}
     \item Dense -  A deeply connected neural network layer (all neurons receive inputs from all neurons in the previous layer) performs matrix-vector multiplication, with the values of said matrix being trained and updated with back propagation \citep{Denselay11:online}.
     \item Conv2D - Creates a convolution kernel that is convolved with the input, in this case an image, or the previous layers output. The result of the kernel produces a tensor of outputs \citep{Conv2Dla69:online}.
-    \item GlovalAveragePooling2D - Down-samples the entire feature map to a single value. In a 2D layer it takes a 4D tensor and returns a 2D tensor with the shape of (batch size, number of channels) \citep{GlobalAv91:online}.
+    \item GlobalAveragePooling2D - Down-samples the entire feature map to a single value. In a 2D layer it takes a 4D tensor and returns a 2D tensor with the shape of (batch size, number of channels) \citep{GlobalAv91:online}.
     \item BatchNormalization - Normalises its inputs by applying a transformation that maintains the outputs mean to as close to 0 as possible and its standard deviation as close to 1 as possible \citep{BatchNor52:online}.
     \item Dropout - Randomly sets inputs values to 0, at a user defined frequency, to prevent over fitting. Those inputs that are not set to - are scaled so that the total sum of the inputs is unchanged \citep{Dropoutl66:online}.
     \item Activation - Applies a user defined activation function to the input, while retaining the input shape \citep{Activati33:online}.
@@ -126,50 +126,123 @@ Next each of the six models had to be built, while each models architectures dif
     \item Flatten - Flattens the input to a 1D shape, while retaining the batch size \citep{Flattenl52:online}.
 \end{itemize}
 
-The models were created inside a create\_model() function which takes the hyper-parameters as an input, and returns the model as an output. Inside the function the Keras sequential or functional API is used to create the model, before defining its optimiser and learning rate, before compiling the model. An example of this, used for the Xception model can be seen in \autoref{fig:xception}.
+The models were created inside a create\_model() function which takes the hyper-parameters as an input, and returns the model as an output. Inside the function the Keras sequential or functional API is used to create the model, before defining its optimiser and learning rate, before compiling the model. An example of this, used for the Xception model can be seen in \autoref{fig:createmodel-function}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{figures/xception.png}
+    \includegraphics[width=\textwidth]{figures/xception-model.png}
     \caption{The create\_model() function structure, used for creating Xception in this case.}
-    \label{fig:xception}
+    \label{fig:createmodel-function}
 \end{figure}
 
 While model architecture of the used models are standard, each model has been slightly modified initially for better performance, and to match the correct output specification (ie. number of classes). Each model has a different architecture and layer structure, and the following sections will explain in detail the model architecture for each, including any modifications made.
 
 \phantomsection
 \subsubsection{AlexNet}
-Since Keras has no application model available for AlexNet, it had to be reproduced manually using Keras' sequential API. A description of the architecture, taken from \citep{krizhevsky2012imagenet}, was used for this.
+Since Keras has no application model available for AlexNet, it had to be reproduced manually using Keras' sequential API. A description of the architecture, taken from \cite{krizhevsky2012imagenet}, was used for this.
 
 AlexNet consists of 5 Conv2D layers, each of which is followed by a BatchNormalization layer, an Activation layer with a rectified linear activation function (ReLU) and a MaxPooling2D layer, before being passed to the next Conv2D layer. Following this the output is flattened, and passed to 3 Dense layers, each of which is followed by a BatchNormalization layer, an Activation layer with a rectified linear activation function (ReLU) and a Dropout layer. This is finally followed by an output layer, which is a Dense layer with a single output (for binary classification), a BatchNormalization layer and an Activation layer with a sigmoid activation function.
 
-Hyper-parameter tuning involved changing the final Dense layers number of units, all three dense layers dropout values, the optimiser and the learning rate. The full model code can be seen in \autoref{fig:alexnet-part1} and \autoref{fig:alexnet-part2}.
+Hyper-parameter tuning involved changing the final Dense layers number of units, all three Dense layers dropout values, the optimiser and the learning rate. The full model code can be seen in \autoref{fig:alexnet-model-part1} and \autoref{fig:alexnet-model-part2}.
 
 \subsubsection{DenseNet201}
+DenseNet201 is included in Keras' application models, so could be imported with pre-trained weights, without having to be reproduced. The architecture Keras uses is taken from \cite{huang2017densely}.
 
+To build the implementation for DenseNet201 used in this project, the base model was imported from Keras' applications, with the pre-trained weights from training on the ImageNet dataset. It was then added to a Keras sequential API where some additional layers were added, to prevent over-fitting and produce a usable output. This was achieved by adding a GlobalAveragePooling2D layer that received DenseNet201's output, followed by a Dense layer with a rectified linear activation function (ReLU), followed by a BatchNormalization layer and a Dropout layer. This is finally followed by an output layer, which is a Dense layer with a single output (for binary classification) and a sigmoid activation function.
+
+Hyper-parameter tuning involved changing the final Dense layers number of units, the Dropout layers dropout values, the optimiser and the learning rate. The full model code can be seen in \autoref{fig:densenet-model}.
 
 \subsubsection{ResNet50V2}
+The implementation of ResNet50V2 follows a similar route to DenseNet201, as the model is available from Keras' application models. The architecture Keras uses is taken from \cite{he2016identity}.
 
+To build the implementation for ResNet50V2 used in this project, the base model was imported from Keras' applications, with the pre-trained weights from training on the ImageNet dataset. It was then added to a Keras sequential API where some additional layers were added, to prevent over-fitting and produce a usable output. This was achieved by adding a GlobalAveragePooling2D layer that received ResNet50V2's output, followed by a Dense layer with a rectified linear activation function (ReLU), followed by a BatchNormalization layer and a Dropout layer. This is finally followed by an output layer, which is a Dense layer with a single output (for binary classification) and a sigmoid activation function.
+
+Hyper-parameter tuning involved changing the final Dense layers number of units, the Dropout layers dropout values, the optimiser and the learning rate. The full model code can be seen in \autoref{fig:resnet-model}.
 
 \subsubsection{SqueezeNet}
+Since Keras has no application model available for SqueezeNet, it had to be reproduced manually using Keras' functional API. A description of the architecture, taken from \cite{iandola2016squeezenet}, was used for this.
 
+To build the implementation for SqueezeNet used in this project, the input shape is defined (image size and number of channels), followed by the SqueezeNet architecture. The SqueezeNet architecture consists of a Conv2D layer followed by five fire modules, separated by MaxPooling2D layers. A fire module is a key factor in SqueezeNet's small size. It consists of a squeeze layer, a Conv2D layer with a 1$\times$1 kernel size, squeezing the inputs. This is followed by an expand layer, which then expands the inputs back up, using a Conv2D layer with a 1$\times$1 kernel size and a Conv2D layer with a 3$\times$3 kernel size. The outputs of both Conv2D layers in the expand layer are then concatenated and results are returned. After the final fire modules, the output is then down-sampled using a GlobalAveragePooling2D layer. Then network was tweaked slightly by then adding a Dropout layer, to reduce over fitting, and a Dense layer with a single output (for binary classification) and a sigmoid activation function.
+
+Hyper-parameter tuning involved changing the final Dropout layers dropout values, the optimiser and the learning rate. The full model code can be seen in \autoref{fig:squeezenet-model}, and the fire module code in \autoref{fig:squeezenet-fire-module}.
 
 \subsubsection{Xception}
+The implementation of Xception follows a similar route to DenseNet201 and ResNet50V2, as the model is available from Keras' application models. The architecture Keras uses is taken from \cite{chollet2017xception}.
 
+To build the implementation for Xception used in this project, the base model was imported from Keras' applications, with the pre-trained weights from training on the ImageNet dataset. It was then added to a Keras sequential API where some additional layers were added, to prevent over-fitting and produce a usable output. This was achieved by adding a GlobalAveragePooling2D layer that received Xception's output, followed by a Dense layer with a rectified linear activation function (ReLU), followed by a BatchNormalization layer and a Dropout layer. This is finally followed by an output layer, which is a Dense layer with a single output (for binary classification) and a sigmoid activation function.
+
+Hyper-parameter tuning involved changing the final Dense layers number of units, the Dropout layers dropout values, the optimiser and the learning rate. The full model code can be seen in \autoref{fig:xception-model}.
 
 \subsubsection{ConvNet}
+ConvNet is abasic CNN created for this project using Keras' sequential API, consisting of three convolutional layers.
 
+To build ConvNet, a sequential model was instantiated, and 3 Conv2D layers were added. Between each Conv2D layer sat an Activation layer with a rectified linear activation function (ReLU) and a MaxPooling2D layer, before being passed to the next Conv2D layer. The Conv2D layers had filter sizes of 32, 32 and 64 respectively, while all sharing the same 3$\times$3 kernel size. The output of the 3 Conv2D layers (in series) was then flattened and fed to the output portion of the model. The output portion of ConvNet was not too dissimilar from Xception, DenseNet201 and ResNet50V2. The output section aimed to reduce over fitting and improve accuracy further, this was achieved by adding a Dense layer with a rectified linear activation function (ReLU) and a Dropout layer. This is finally followed by an output layer, which is a Dense layer with a single output (for binary classification) and a sigmoid activation function.
+
+Hyper-parameter tuning involved changing the final Dense layers number of units, the Dropout layers dropout values, the optimiser and the learning rate. The full model code can be seen in \autoref{fig:convnet-model}.
 
 \subsection{Cross Validation Training}
+Next the model must be trained, and its hyper-parameters tuned, using stratified K fold cross validation. Firstly, to perform hyper-parameter tuning, all of the hyper-parameter combinations must be iterated through. For each iteration of hyper-parameter combinations, cross validation was then performed. Using Scikit-Learns stratified K fold implementation, indexes for the training and validation dataset were created. These variations of indexes, put together to create 5 folds, were the iterated through. For each set of training and validation indexes, the images for each were collected using the pre-processing function discussed earlier. Logging for the model was set up, so that TensorBoard could record the fitting data of the models, over the epochs that the model trained. Details of the hyper-parameters used for each particular run were also stored. Several callbacks were used while training the model, the most notable of which are the following. Firstly, the model checkpoint callback, which saved the trained model weights of each model. Secondly, the early stopping callback, which finished the model training if the validation loss rate plateaued over three epochs. Third, the learning rate reduction callback, which reduced the learning rate by a factor of half, if the validation loss plateaued over one epoch. The model was then trained, over a maximum of 20 epochs, using the previously discussed callbacks and training and validation datasets. Finally the location of where the models weights were saved were recorded, so each trained model could be called upon during validation. A snippet of the cross validation code, where the folds are iterated through, the model trained and metrics recorded, can be seen in \autoref{fig:cv-function}.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/cv-code.png}
+    \caption{A snippet of the cross validation code.}
+    \label{fig:cv-function}
+\end{figure}
 
 \subsection{Model Evaluation}
+Finally the models were evaluated. This was done by iterating though all of the hyper-parameter variations, and then calculating mean figures of accuracy, precision, recall F1 score and confusion matrices for all the folds of that variation. These metrics were then saved to a CSV file to be evaluated. A snippet showing the functions used for evaluation can be seen in \autoref{fig:metric-calculation}.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/metric-calculation.png}
+    \caption{A snippet showing the functions used for evaluation.}
+    \label{fig:metric-calculation}
+\end{figure}
+
+\section{Testing}
+The testing of the models followed the structure defined in \ref{model-training}. After running each of the six models through hyper-parameter tuning on the small version of the datasets, it was found that the Xception model, with the following hyper-parameters was the best performing:
+
+\begin{itemize}
+    \item Number of Dense units - 128
+    \item Dropout - 0.1
+    \item Optimiser - Adam
+    \item Learning rate - 0.001
+\end{itemize}
+
+While the full results and analysis of which will be discussed later, this was the chosen model to perform further improvements on to further improve the models performance. The model went through five iterations of improvements before a final evaluation was performed. The five iterations of improvements were performed using a trial and error technique, using various research identified during this phase as the basis for each improvement. The following sections detail each improvement made to the Xception model.
+
+\subsection{Improvement 1}
+The first improvement to the Xception model was to freeze all of the base models trainable weights, seen in \autoref{fig:xception-improvement-1}, meaning that only weights in the added GlobalAveragePooling2D, Dense and Dropout layers could be training. This recommendation was provided by Keras' own transfer learning guide, with the reasoning that it would prevent over-fitting to the training data \citep{Transfer59:online}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/xception-improvement-1.png}
+    \caption{Freezing the base models trainable weights.}
+    \label{fig:xception-improvement-1}
+\end{figure}
+
+This yielded far worse results, possibly due to the fact that Xceptions pre-trained weights are from training on ImageNet, a dataset of images of objects, few of which, if any, could be X-Ray images. The changes were not carried onto the next rounds of improvements.
+
+\subsection{Improvement 2}
+The second improvement made to the Xception model was to add regularisers to the Dense layer appended to the base model, seen in \autoref{fig:xception-improvement-2}. Regularisers apply a penalty on the layer parameters and activity during model optimisation, this penalty is used in the loss function that the model works on optimising while training \citep{Layerwei14:online}. During this round another optimiser was also trailed as an extension to the hyper-parameter tuning, stochastic gradient descent with momentum. Using momentum in gradient descent algorithms can greatly improve training times by helping accelerate the gradient in the correct direction, instead of travelling at a fixed velocity \citep{qian1999momentum}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/xception-improvement-2.png}
+    \caption{Adding regularizers to the Dense layer.}
+    \label{fig:xception-improvement-2}
+\end{figure}
+
+The regularisation applied to the Dense layer resulted in slightly worse results than without, possibly due to its affect on the model optimisation, with the base models layers not being regularised, so was not carried onto the next rounds of improvements. Using stochastic gradient descent with momentum did result in a faster training time over classic stochastic gradient descent, without affecting model performance. This however was still slower than the previous best optimiser selected in hyper-parameter tuning, the Adam optimiser, so was also not carried onto the next rounds of improvements
+
+\subsection{Improvement 3}
+
+\subsection{Improvement 4}
+
+\subsection{Improvement 5}
 
 \section{Operation of Artefact}
+The operation of the model evaluation notebooks first depends on both the software and hardware requirements listed in \ref{project-requirements}.
 
-\section{Initial Results}
-
-\section{Model Improvements}
-
-\section{Final Results}
+\section{Results}
