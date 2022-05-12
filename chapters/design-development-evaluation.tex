@@ -201,7 +201,7 @@ Finally the models were evaluated. This was done by iterating though all of the 
 \end{figure}
 
 \section{Testing}
-The testing of the models followed the structure defined in \ref{model-training}. After running each of the six models through hyper-parameter tuning on the small version of the datasets, it was found that the Xception model, with the following hyper-parameters was the best performing:
+The testing of the models followed the structure defined in section \ref{model-training}. After running each of the six models through hyper-parameter tuning on the small version of the datasets, it was found that the Xception model, with the following hyper-parameters was the best performing:
 
 \begin{itemize}
     \item Number of Dense units - 128
@@ -210,39 +210,78 @@ The testing of the models followed the structure defined in \ref{model-training}
     \item Learning rate - 0.001
 \end{itemize}
 
-While the full results and analysis of which will be discussed later, this was the chosen model to perform further improvements on to further improve the models performance. The model went through five iterations of improvements before a final evaluation was performed. The five iterations of improvements were performed using a trial and error technique, using various research identified during this phase as the basis for each improvement. The following sections detail each improvement made to the Xception model.
+While the full results and analysis of which will be discussed later, this was the chosen model to perform further improvements on to further improve the models performance. The model went through five iterations of improvements before a final evaluation was performed. The five iterations of improvements were performed using a trial and error technique, using various research identified during this phase as the basis for each improvement. The following sections detail each attempted improvement made to the Xception model.
 
-\subsection{Improvement 1}
-The first improvement to the Xception model was to freeze all of the base models trainable weights, seen in \autoref{fig:xception-improvement-1}, meaning that only weights in the added GlobalAveragePooling2D, Dense and Dropout layers could be training. This recommendation was provided by Keras' own transfer learning guide, with the reasoning that it would prevent over-fitting to the training data \citep{Transfer59:online}.
+\phantomsection
+\subsubsection{Improvement 1 - Freezing Weights}
+The first improvement to the Xception model was to freeze all of the base models trainable weights, seen in \autoref{fig:xception-freezing}, meaning that only weights in the added GlobalAveragePooling2D, Dense and Dropout layers could be training. This recommendation was provided by Keras' own transfer learning guide, with the reasoning that it would prevent over-fitting to the training data \citep{Transfer59:online}. The full model code can be seen in \autoref{fig:xception-improvement-1}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{figures/xception-improvement-1.png}
+    \includegraphics[width=\textwidth]{figures/xception-freezing.png}
     \caption{Freezing the base models trainable weights.}
-    \label{fig:xception-improvement-1}
+    \label{fig:xception-freezing}
 \end{figure}
 
 This yielded far worse results, possibly due to the fact that Xceptions pre-trained weights are from training on ImageNet, a dataset of images of objects, few of which, if any, could be X-Ray images. The changes were not carried onto the next rounds of improvements.
 
-\subsection{Improvement 2}
-The second improvement made to the Xception model was to add regularisers to the Dense layer appended to the base model, seen in \autoref{fig:xception-improvement-2}. Regularisers apply a penalty on the layer parameters and activity during model optimisation, this penalty is used in the loss function that the model works on optimising while training \citep{Layerwei14:online}. During this round another optimiser was also trailed as an extension to the hyper-parameter tuning, stochastic gradient descent with momentum. Using momentum in gradient descent algorithms can greatly improve training times by helping accelerate the gradient in the correct direction, instead of travelling at a fixed velocity \citep{qian1999momentum}.
+\subsubsection{Improvement 2 - Regularisation}
+The second improvement made to the Xception model was to add regularisers to the Dense layer appended to the base model, seen in \autoref{fig:xception-regular}. Regularisers apply a penalty on the layer parameters and activity during model optimisation, this penalty is used in the loss function that the model works on optimising while training \citep{Layerwei14:online}. During this round another optimiser was also trailed as an extension to the hyper-parameter tuning, stochastic gradient descent with momentum. Using momentum in gradient descent algorithms can greatly improve training times by helping accelerate the gradient in the correct direction, instead of travelling at a fixed velocity \citep{qian1999momentum}. The full model code can be seen in \autoref{fig:xception-improvement-1}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{figures/xception-improvement-2.png}
-    \caption{Adding regularizers to the Dense layer.}
-    \label{fig:xception-improvement-2}
+    \includegraphics[width=\textwidth]{figures/xception-regular.png}
+    \caption{Adding regularisers to the Dense layer.}
+    \label{fig:xception-regular}
 \end{figure}
 
-The regularisation applied to the Dense layer resulted in slightly worse results than without, possibly due to its affect on the model optimisation, with the base models layers not being regularised, so was not carried onto the next rounds of improvements. Using stochastic gradient descent with momentum did result in a faster training time over classic stochastic gradient descent, without affecting model performance. This however was still slower than the previous best optimiser selected in hyper-parameter tuning, the Adam optimiser, so was also not carried onto the next rounds of improvements
+The regularisation applied to the Dense layer resulted in slightly more varied results than without, possibly due to its affect on the model optimisation, with the base models layers not being regularised, but showed a marginal speed increase. Using stochastic gradient descent with momentum did result in a faster training time over classic stochastic gradient descent, without affecting model performance. This however was still slower than the previous best optimiser selected in hyper-parameter tuning, the Adam optimiser, so was also not carried onto the next rounds of improvements
 
-\subsection{Improvement 3}
+\subsubsection{Improvement 3 - Concatenated Models}
+The third improvement drew inspiration from \cite{fitriasari2021improvement}, which proposes an architecture consisting of a "modified combination of two CNN architectures named Xception and ResNet50V2". This model was made using Keras' sequential API, where two separate "sub-models" consisting of a regularised version of Xception and ResNet50V2 used previously were concatenated, and passed through an additional 3 Dense layers and a Dropout layer before its final output. The full model code can be seen in \autoref{fig:xception-improvement-3-part1} and \autoref{fig:xception-improvement-3-part2}.
 
-\subsection{Improvement 4}
+While training the model learnt relatively slow, compared to other models, likely due to its large size. While model accuracy was not improved at all, further trial and error of this architecture lead to the next round of improvements.
 
-\subsection{Improvement 5}
+\subsubsection{Improvement 4}
+The fourth improvement was an exact replica of the \cite{fitriasari2021improvement} model. Here the two "sub-models" had no additional layers added before concatenation, and all trainable layers were frozen but the last 3. Following the "sub-models" concatenation, the output of the two were passed through a Conv2D layer, flattened and passed through a Dropout layer followed by 2 Dense layers, one with a ReLU activation function and the other with a sigmoid activation function. The first dense layer was regularised and the second was used as the output layer. The full model code can be seen in \autoref{fig:xception-improvement-4}.
+
+Here the training time was halved, showing a significant improvement over all other models training time. This is likely due to the frozen training layers. While the model accuracy was only slightly less than improvement 3, the model showed an alarmingly high number of False Negatives, so was no longer considered for the final assessment.
+
+\subsubsection{Improvement 5}
+The final trial at improving the Xception model took cues from all the previous attempted improvements, by combining them into one model. Here none of the weights were frozen and the same layers were after the Xception model as in Improvement 4, which showed some speed increases with regularisation, and consistency with the Conv2D layer and Dense layers. The full model code can be seen in \autoref{fig:xception-improvement-5}.
+
+The final round of improvements did show some promise, with significantly faster training times, but this came at a cost of a much worse mean accuracy in validation and testing. Eventually all improvements were abandoned, and the original alterations to the network where deemed the most suitable and performant.
 
 \section{Operation of Artefact}
-The operation of the model evaluation notebooks first depends on both the software and hardware requirements listed in \ref{project-requirements}.
+The operation of the model evaluation notebooks first depends on both the software and hardware requirements listed in section \ref{project-requirements}. Once hardware requirements are met, the Python notebooks downloaded can then be ran, to begin model training and evaluation. The models can be tuned using the the model variables section, seen in \autoref{fig:model-variables}, and the hyper-parameters tuning section, seen in \autoref{fig:hyper-parameters-code}. One must pay close attention to the "DATASET\_PATH" variable and ensure its pointed to the directory in which the COVIDx-CXR dataset resides.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\textwidth]{figures/model-variables.png}
+    \caption{Where to change model variables.}
+    \label{fig:model-variables}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/hyper-parameters-code.png}
+    \caption{Where to change hyper-parameters.}
+    \label{fig:hyper-parameters-code}
+\end{figure}
 
 \section{Results}
+The following are the results from the initial round of training, showing only the best hyper-parameter variations. The full results can be seen in the appendices.
+
+\begin{table}[H]
+    \caption{Risks likely to be encountered during this project.}
+    \centering
+    \begin{tabular}{l|l|l|l|l|l}
+    \begin{tabular}[c]{@{}l@{}}Model and\\ Hyper-Parameters\end{tabular} & Accuracy & Precision & Recall & F1 Score & \begin{tabular}[c]{@{}l@{}}Training\\ Time (s)\end{tabular} \\
+    \hline\hline
+    \begin{tabular}[c]{@{}l@{}}\textbf{Xception}\\ Dense units - 128\\ Dropout - 0.1\\ Optimiser - Adam\\  Learning rate - 0.001\end{tabular} & 0.9780 & 0.9919 & 0.9640 & 0.9775 & 1202 \\
+    \begin{tabular}[c]{@{}l@{}}\textbf{DenseNet}\\ Dense units - 128\\ Dropout - 0.1\\ Optimiser - Adam\\ Learning rate - 0.0005\end{tabular} & 0.9745 & 0.9900 & 0.9590 & 0.9738 & 762 \\
+    \begin{tabular}[c]{@{}l@{}}\textbf{ResNet}\\ Dense units - 64\\ Dropout - 0.2\\ Optimiser - Adam\\ Learning rate - 0.0005\end{tabular} & 0.9510 & 0.9771 & 0.9240 & 0.9488 & 557 \\
+    \begin{tabular}[c]{@{}l@{}}\textbf{SqueezeNet}\\ Dropout - 0.2\\ Optimiser - Adam\\ Learning rate - 0.0005\end{tabular} & 0.9290 & 0.9036 & 0.9620 & 0.9316 & 282 \\
+    \begin{tabular}[c]{@{}l@{}}\textbf{ConvNet}\\ Dense units - 128\\ Dropout - 0.2\\ Optimiser - RMS-Prop\\ Learning rate - 0.0005\end{tabular} & 0.7995 & 0.7823 & 0.8340 & 0.8060 & 331 \\
+    \begin{tabular}[c]{@{}l@{}}\textbf{AlexNet}\\ Dense units - 1024\\ Dropout - 0.2\\ Optimiser - SGD\\ Learning rate - 0.001\end{tabular} & 0.7095 & 0.8123 & 0.5480 & 0.6532 & 734
+\end{tabular}
+\end{table}
