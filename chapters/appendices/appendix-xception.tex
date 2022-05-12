@@ -4,3 +4,31 @@
     \caption{The Xception model.}
     \label{fig:xception-model}
 \end{figure}
+
+\begin{landscape}
+\begin{table}
+    \caption{Xception results after initial training on the small COVIDx-CXR dataset.}
+    \centering
+    \begin{tabular}{l|l|l|l|l|l|l|l|l|l}
+    Model & Dense units & Dropout & Optimiser & Learning Rate & \begin{tabular}[c]{@{}l@{}}Mean Test\\ Accuracy\end{tabular} & \begin{tabular}[c]{@{}l@{}}Mean Test\\Precision\end{tabular} & \begin{tabular}[c]{@{}l@{}}Mean Test\\Recall\end{tabular} & \begin{tabular}[c]{@{}l@{}}Mean Test\\F1 Score\end{tabular} & \begin{tabular}[c]{@{}l@{}}Training\\ Time (s)\end{tabular} \\
+    \hline\hline
+    Xception & 128 & 0.1 & Adam & 0.0010 & 0.9780 & 0.9919 & 0.9640 & 0.9775 & 1203 \\
+    Xception & 128 & 0.2 & Adam & 0.0010 & 0.9745 & 0.9894 & 0.9590 & 0.9739 & 1141 \\
+    Xception & 64 & 0.2 & Adam & 0.0010 & 0.9630 & 0.9896 & 0.9360 & 0.9619 & 955 \\
+    Xception & 64 & 0.1 & Adam & 0.0010 & 0.9180 & 0.9916 & 0.8440 & 0.8951 & 915 \\
+    Xception & 128 & 0.1 & Adam & 0.0005 & 0.8990 & 0.9892 & 0.8080 & 0.8768 & 1063 \\
+    Xception & 128 & 0.2 & Adam & 0.0005 & 0.8405 & 0.9895 & 0.6900 & 0.7926 & 990 \\
+    Xception & 64 & 0.2 & Adam & 0.0005 & 0.8160 & 0.9912 & 0.6400 & 0.7135 & 1070 \\
+    Xception & 64 & 0.1 & Adam & 0.0005 & 0.8130 & 0.9824 & 0.6370 & 0.7294 & 951 \\
+    Xception & 64 & 0.2 & SGD & 0.0010 & 0.7705 & 0.8680 & 0.6380 & 0.7331 & 1505 \\
+    Xception & 128 & 0.1 & SGD & 0.0010 & 0.7505 & 0.8597 & 0.5970 & 0.7003 & 1459 \\
+    Xception & 128 & 0.2 & SGD & 0.0010 & 0.7470 & 0.8489 & 0.6030 & 0.7042 & 1541 \\
+    Xception & 64 & 0.1 & SGD & 0.0010 & 0.6975 & 0.6643 & 0.4960 & 0.5674 & 1309 \\
+    Xception & 128 & 0.1 & SGD & 0.0005 & 0.6475 & 0.7047 & 0.4490 & 0.5441 & 1294 \\
+    Xception & 64 & 0.2 & SGD & 0.0005 & 0.6360 & 0.6372 & 0.3720 & 0.4656 & 1247 \\
+    Xception & 128 & 0.2 & SGD & 0.0005 & 0.6290 & 0.6514 & 0.3350 & 0.4421 & 1291 \\
+    Xception & 64 & 0.1 & SGD & 0.0005 & 0.5915 & 0.6214 & 0.3390 & 0.4248 & 1020
+    \end{tabular}
+    \label{fig:xception-results}
+\end{table}
+\end{landscape}

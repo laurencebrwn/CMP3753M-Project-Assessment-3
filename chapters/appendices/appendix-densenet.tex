@@ -4,3 +4,31 @@
     \caption{The DenseNet201 model.}
     \label{fig:densenet-model}
 \end{figure}
+
+\begin{landscape}
+\begin{table}
+    \caption{DenseNet results after initial training on the small COVIDx-CXR dataset.}
+    \centering
+    \begin{tabular}{l|l|l|l|l|l|l|l|l|l}
+    Model & Dense units & Dropout & Optimiser & Learning Rate & \begin{tabular}[c]{@{}l@{}}Mean Test\\ Accuracy\end{tabular} & \begin{tabular}[c]{@{}l@{}}Mean Test\\Precision\end{tabular} & \begin{tabular}[c]{@{}l@{}}Mean Test\\Recall\end{tabular} & \begin{tabular}[c]{@{}l@{}}Mean Test\\F1 Score\end{tabular} & \begin{tabular}[c]{@{}l@{}}Training\\ Time (s)\end{tabular} \\
+    \hline\hline
+    DenseNet & 128 & 0.1 & Adam & 0.0005 & 0.9745 & 0.9901 & 0.9590 & 0.9738 & 763 \\
+    DenseNet & 64 & 0.1 & Adam & 0.0005 & 0.9690 & 0.9772 & 0.9610 & 0.9685 & 870 \\
+    DenseNet & 64 & 0.2 & Adam & 0.0010 & 0.9650 & 0.9739 & 0.9560 & 0.9647 & 1120 \\
+    DenseNet & 128 & 0.2 & Adam & 0.0010 & 0.9560 & 0.9594 & 0.9530 & 0.9557 & 843 \\
+    DenseNet & 128 & 0.2 & Adam & 0.0005 & 0.9555 & 0.9722 & 0.9370 & 0.9530 & 768 \\
+    DenseNet & 64 & 0.2 & Adam & 0.0005 & 0.9380 & 0.9825 & 0.8930 & 0.9288 & 760 \\
+    DenseNet & 128 & 0.1 & Adam & 0.0010 & 0.9255 & 0.9343 & 0.9260 & 0.9277 & 732 \\
+    DenseNet & 128 & 0.2 & SGD & 0.0010 & 0.9060 & 0.9052 & 0.9070 & 0.9057 & 988 \\
+    DenseNet & 64 & 0.1 & Adam & 0.0010 & 0.8960 & 0.9355 & 0.8550 & 0.8900 & 858 \\
+    DenseNet & 64 & 0.2 & SGD & 0.0010 & 0.8950 & 0.9239 & 0.8620 & 0.8909 & 993 \\
+    DenseNet & 128 & 0.1 & SGD & 0.0010 & 0.8825 & 0.9157 & 0.8430 & 0.8770 & 960 \\
+    DenseNet & 64 & 0.1 & SGD & 0.0010 & 0.8790 & 0.9141 & 0.8370 & 0.8732 & 1026 \\
+    DenseNet & 64 & 0.2 & SGD & 0.0005 & 0.8620 & 0.9118 & 0.8050 & 0.8516 & 1013 \\
+    DenseNet & 64 & 0.1 & SGD & 0.0005 & 0.8575 & 0.8793 & 0.8340 & 0.8541 & 1056 \\
+    DenseNet & 128 & 0.1 & SGD & 0.0005 & 0.8520 & 0.8777 & 0.8180 & 0.8463 & 1061 \\
+    DenseNet & 128 & 0.2 & SGD & 0.0005 & 0.8460 & 0.8583 & 0.8260 & 0.8401 & 1024
+    \end{tabular}
+    \label{fig:densenet-results}
+\end{table}
+\end{landscape}

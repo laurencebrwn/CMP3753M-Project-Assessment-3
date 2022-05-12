@@ -4,3 +4,31 @@
     \caption{The ConvNet model.}
     \label{fig:convnet-model}
 \end{figure}
+
+\begin{landscape}
+\begin{table}
+    \caption{ConvNet results after initial training on the small COVIDx-CXR dataset.}
+    \centering
+    \begin{tabular}{l|l|l|l|l|l|l|l|l|l}
+    Model & Dense units & Dropout & Optimiser & Learning Rate & \begin{tabular}[c]{@{}l@{}}Mean Test\\ Accuracy\end{tabular} & \begin{tabular}[c]{@{}l@{}}Mean Test\\Precision\end{tabular} & \begin{tabular}[c]{@{}l@{}}Mean Test\\Recall\end{tabular} & \begin{tabular}[c]{@{}l@{}}Mean Test\\F1 Score\end{tabular} & \begin{tabular}[c]{@{}l@{}}Training\\ Time (s)\end{tabular} \\ \\
+    \hline\hline
+    ConvNet & 128 & 0.2 & RMSProp & 0.0005 & 0.7995 & 0.7823 & 0.8340 & 0.8060 & 332 \\
+    ConvNet & 128 & 0.5 & RMSProp & 0.0005 & 0.7990 & 0.8158 & 0.7750 & 0.7904 & 400 \\
+    ConvNet & 128 & 0.2 & Adam & 0.0005 & 0.7885 & 0.8347 & 0.7230 & 0.7702 & 338 \\
+    ConvNet & 64 & 0.2 & RMSProp & 0.0005 & 0.7875 & 0.8012 & 0.7730 & 0.7817 & 367 \\
+    ConvNet & 128 & 0.5 & RMSProp & 0.0010 & 0.7635 & 0.7292 & 0.8620 & 0.7868 & 347 \\
+    ConvNet & 128 & 0.5 & Adam & 0.0005 & 0.7455 & 0.8080 & 0.7570 & 0.7437 & 374 \\
+    ConvNet & 64 & 0.2 & Adam & 0.0005 & 0.7450 & 0.6536 & 0.6330 & 0.6428 & 296 \\
+    ConvNet & 64 & 0.2 & RMSProp & 0.0010 & 0.6935 & 0.5780 & 0.7310 & 0.6327 & 332 \\
+    ConvNet & 128 & 0.2 & Adam & 0.0010 & 0.6900 & 0.7111 & 0.5980 & 0.6327 & 350 \\
+    ConvNet & 64 & 0.5 & RMSProp & 0.0005 & 0.6895 & 0.6312 & 0.5170 & 0.5294 & 372 \\
+    ConvNet & 128 & 0.2 & RMSProp & 0.0010 & 0.6825 & 0.6856 & 0.5630 & 0.5809 & 283 \\
+    ConvNet & 128 & 0.5 & Adam & 0.0010 & 0.6630 & 0.5527 & 0.5680 & 0.5485 & 226 \\
+    ConvNet & 64 & 0.2 & Adam & 0.0010 & 0.6270 & 0.6318 & 0.6620 & 0.6202 & 289 \\
+    ConvNet & 64 & 0.5 & Adam & 0.0005 & 0.6105 & 0.4663 & 0.4480 & 0.4136 & 305 \\
+    ConvNet & 64 & 0.5 & RMSProp & 0.0010 & 0.5930 & 0.3967 & 0.4140 & 0.4027 & 206 \\
+    ConvNet & 64 & 0.5 & Adam & 0.0010 & 0.5635 & 0.5517 & 0.3940 & 0.3666 & 220
+    \end{tabular}
+    \label{fig:convnet-results}
+\end{table}
+\end{landscape}
