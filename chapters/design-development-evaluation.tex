@@ -269,9 +269,10 @@ The operation of the model evaluation notebooks first depends on both the softwa
 \end{figure}
 
 \section{Results}
-The following are the results from the initial round of training, showing each of the six models, with only the best hyper-parameter variations. The full results of each model can be seen in \autoref{fig:xception-results}, \autoref{fig:densenet-results}, \autoref{fig:resnet-results}, \autoref{fig:squeezenet-results}, \autoref{fig:convnet-results} and \autoref{fig:alexnet-results} respectively. Note, here the Accuracy, Precision, Recall and F1 Scores are taken from a mean of the evaluation of each fold on the test dataset.
+The following are the results from the initial round of training, showing each of the six models, with only the best hyper-parameter variations. The full results of each model can be seen in \autoref{fig:xception-results}, \autoref{fig:densenet-results}, \autoref{fig:resnet-results}, \autoref{fig:squeezenet-results}, \autoref{fig:convnet-results} and \autoref{fig:alexnet-results} respectively. Note, here the Accuracy, Precision, Recall and F1 Scores are taken from a mean of the evaluation of each fold on the test dataset for conciseness.
 
 \begin{longtable}[c]{l|l|l|l|l|l}
+    \caption{Initial training results of the six models, with best hyper-parameters.} \\
     \begin{tabular}[c]{@{}l@{}}Model and\\ Hyper-Parameters\end{tabular} & Accuracy & Precision & Recall & \begin{tabular}[c]{@{}l@{}}F1\\ Score\end{tabular} & \begin{tabular}[c]{@{}l@{}}Training\\ Time (s)\end{tabular} \\ \hline\hline
     \endfirsthead
     %
@@ -280,31 +281,77 @@ The following are the results from the initial round of training, showing each o
     \begin{tabular}[c]{@{}l@{}}Model and\\ Hyper-Parameters\end{tabular} & Accuracy & Precision & Recall & \begin{tabular}[c]{@{}l@{}}F1\\ Score\end{tabular} & \begin{tabular}[c]{@{}l@{}}Training\\ Time (s)\end{tabular} \\ \hline\hline
     \endhead
     %
-    \begin{tabular}[c]{@{}l@{}}Xception\\ Dense units - 128\\ Dropout - 0.1\\ Optimiser - Adam\\  Learning rate - 0.001\end{tabular} & 0.9780 & 0.9919 & 0.9640 & 0.9775 & 1202 \\ \hline
-    \begin{tabular}[c]{@{}l@{}}DenseNet\\ Dense units - 128\\ Dropout - 0.1\\ Optimiser - Adam\\ Learning rate - 0.0005\end{tabular} & 0.9745 & 0.9900 & 0.9590 & 0.9738 & 762 \\ \hline
-    \begin{tabular}[c]{@{}l@{}}ResNet\\ Dense units - 64\\ Dropout - 0.2\\ Optimiser - Adam\\ Learning rate - 0.0005\end{tabular} & 0.9510 & 0.9771 & 0.9240 & 0.9488 & 557 \\ \hline
-    \begin{tabular}[c]{@{}l@{}}SqueezeNet\\ Dropout - 0.2\\ Optimiser - Adam\\ Learning rate - 0.0005\end{tabular} & 0.9290 & 0.9036 & 0.9620 & 0.9316 & 282 \\ \hline
-    \begin{tabular}[c]{@{}l@{}}ConvNet\\ Dense units - 128\\ Dropout - 0.2\\ Optimiser - RMS-Prop\\ Learning rate - 0.0005\end{tabular} & 0.7995 & 0.7823 & 0.8340 & 0.8060 & 331 \\ \hline
-    \begin{tabular}[c]{@{}l@{}}AlexNet\\ Dense units - 1024\\ Dropout - 0.2\\ Optimiser - SGD\\ Learning rate - 0.001\end{tabular} & 0.7095 & 0.8123 & 0.5480 & 0.6532 & 734
-    \label{fig:initial-results-best}
+    \begin{tabular}[c]{@{}l@{}}Xception\\ \textit{Dense units - 128}\\ \textit{Dropout - 0.1}\\ \textit{Optimiser - Adam}\\  \textit{Learning rate - 0.001}\end{tabular} & 0.9780 & 0.9919 & 0.9640 & 0.9775 & 1202 \\
+    \begin{tabular}[c]{@{}l@{}}DenseNet\\ \textit{Dense units - 128}\\ \textit{Dropout - 0.1}\\ \textit{Optimiser - Adam}\\ \textit{Learning rate - 0.0005}\end{tabular} & 0.9745 & 0.9900 & 0.9590 & 0.9738 & 762 \\
+    \begin{tabular}[c]{@{}l@{}}ResNet\\ \textit{Dense units - 64}\\ \textit{Dropout - 0.2}\\ \textit{Optimiser - Adam}\\ \textit{Learning rate - 0.0005}\end{tabular} & 0.9510 & 0.9771 & 0.9240 & 0.9488 & 557 \\
+    \begin{tabular}[c]{@{}l@{}}SqueezeNet\\ \textit{Dropout - 0.2}\\ \textit{Optimiser - Adam}\\ \textit{Learning rate - 0.0005}\end{tabular} & 0.9290 & 0.9036 & 0.9620 & 0.9316 & 282 \\
+    \begin{tabular}[c]{@{}l@{}}ConvNet\\ \textit{Dense units - 128}\\ \textit{Dropout - 0.2}\\ \textit{Optimiser - RMS-Prop}\\ \textit{Learning rate - 0.0005}\end{tabular} & 0.7995 & 0.7823 & 0.8340 & 0.8060 & 331 \\
+    \begin{tabular}[c]{@{}l@{}}AlexNet\\ \textit{Dense units - 1024}\\ \textit{Dropout - 0.2}\\ \textit{Optimiser - SGD}\\\textit{Learning rate - 0.001}\end{tabular} & 0.7095 & 0.8123 & 0.5480 & 0.6532 & 734
+    \label{fig:initial-results-short}
 \end{longtable}
 
-The following are a summary of the results from the second round of training, showing each of the improvements performance on the Xception model. The full results of each improvement can be seen in \autoref{fig:xception-improvement-results}. Note, here the Accuracy, Precision, Recall and F1 Scores are taken from a mean of the evaluation of each fold on the test dataset.
+The following are a summary of the results from the second round of training, showing each of the improvements performance on the Xception model. The full results of each improvement can be seen in \autoref{fig:xception-improvement-results}. Note, here the Accuracy, Precision, Recall and F1 Scores are taken from a mean of the evaluation of each fold on the test dataset for conciseness.
 
 \begin{longtable}[c]{l|l|l|l|l|l}
-Model & Accuracy & Precision & Recall & \begin{tabular}[c]{@{}l@{}}F1\\ Score\end{tabular} & \begin{tabular}[c]{@{}l@{}}Training \\ Time (s)\end{tabular} \\ \hline\hline
-\endfirsthead
-%
-\multicolumn{6}{c}%
-{{\bfseries Table \thetable\ continued from previous page}} \\
-Model & Accuracy & Precision & Recall & \begin{tabular}[c]{@{}l@{}}F1\\ Score\end{tabular} & \begin{tabular}[c]{@{}l@{}}Training \\ Time (s)\end{tabular} \\ \hline\hline
-\endhead
-%
-\begin{tabular}[c]{@{}l@{}}Improvement 1\\ (Adam)\end{tabular} & 0.5740 & 0.7293 & 0.2780 & 0.3600 & 177 \\ \hline
-\begin{tabular}[c]{@{}l@{}}Improvement 1\\ (SGD \& Momentum)\end{tabular} & 0.5330 & 0.5903 & 0.1510 & 0.2241 & 187 \\ \hline
-\begin{tabular}[c]{@{}l@{}}Improvement 2\\ (Adam)\end{tabular} & 0.9395 & 0.9837 & 0.8950 & 0.9331 & 1132 \\ \hline
-\begin{tabular}[c]{@{}l@{}}Improvement 2\\ (SGD \& Momentum)\end{tabular} & 0.8670 & 0.9316 & 0.7920 & 0.8555 & 1200 \\ \hline
-Improvement 3 & 0.9095 & 0.9864 & 0.8310 & 0.8915 & 1389 \\ \hline
-Improvement 4 & 0.8240 & 0.7787 & 0.6660 & 0.7177 & 646 \\ \hline
-Improvement 5 & 0.6715 & 0.6826 & 0.5590 & 0.5161 & 922
+    \caption{Improvement training results of the Xception model.} \\
+    Model & Accuracy & Precision & Recall & \begin{tabular}[c]{@{}l@{}}F1\\ Score\end{tabular} & \begin{tabular}[c]{@{}l@{}}Training \\ Time (s)\end{tabular} \\ \hline\hline
+    \endfirsthead
+    %
+    \multicolumn{6}{c}%
+    {{\bfseries Table \thetable\ continued from previous page}} \\
+    Model & Accuracy & Precision & Recall & \begin{tabular}[c]{@{}l@{}}F1\\ Score\end{tabular} & \begin{tabular}[c]{@{}l@{}}Training \\ Time (s)\end{tabular} \\ \hline\hline
+    \endhead
+    %
+    \begin{tabular}[c]{@{}l@{}}Improvement 1\\ \textit{Adam}\end{tabular} & 0.5740 & 0.7293 & 0.2780 & 0.3600 & 177 \\
+    \begin{tabular}[c]{@{}l@{}}Improvement 1\\ \textit{SGD \& Momentum}\end{tabular} & 0.5330 & 0.5903 & 0.1510 & 0.2241 & 187 \\
+    \begin{tabular}[c]{@{}l@{}}Improvement 2\\ \textit{Adam}\end{tabular} & 0.9395 & 0.9837 & 0.8950 & 0.9331 & 1132 \\
+    \begin{tabular}[c]{@{}l@{}}Improvement 2\\ \textit{SGD \& Momentum}\end{tabular} & 0.8670 & 0.9316 & 0.7920 & 0.8555 & 1200 \\
+    Improvement 3 & 0.9095 & 0.9864 & 0.8310 & 0.8915 & 1389 \\
+    Improvement 4 & 0.8240 & 0.7787 & 0.6660 & 0.7177 & 646 \\ 
+    Improvement 5 & 0.6715 & 0.6826 & 0.5590 & 0.5161 & 922
+    \label{fig:improvement-results-short}
+\end{longtable}
+
+The following are a summary of the results from the final round of training, showing the performance of the Xception model with the first, and best improvements (\autoref{fig:xception-model-final}), the performance of the Xception model with no improvements (\autoref{fig:xception-model-final-no-improv}) and the performance of the Xception model with no pre-trained weights (\autoref{fig:xception-model-final-no-weights}). Each of which are trained on both the small and large datasets of the binary classification label sets. The full results of each model can be seen in \autoref{fig:xception-model-final-results}. Note, here the Accuracy, Precision, Recall and F1 Scores are taken from a mean of the evaluation of each fold on the test dataset for conciseness.
+
+\begin{longtable}[c]{l|l|l|l|l|l}
+    \caption{Final training results of the binary classification performance of the Xception models, with improvements from this study, and without.} \\
+    Model & Accuracy & Precision & Recall & \begin{tabular}[c]{@{}l@{}}F1\\ Score\end{tabular} & \begin{tabular}[c]{@{}l@{}}Training\\ Time (s)\end{tabular} \\ \hline\hline
+    \endfirsthead
+    %
+    \multicolumn{6}{c}%
+    {{\bfseries Table \thetable\ continued from previous page}} \\
+    Model & Accuracy & Precision & Recall & \begin{tabular}[c]{@{}l@{}}F1\\ Score\end{tabular} & \begin{tabular}[c]{@{}l@{}}Training\\ Time (s)\end{tabular} \\ \hline\hline
+    \endhead
+    %
+    \multicolumn{6}{c}{SMALL DATASET} \\ \hline
+    \begin{tabular}[c]{@{}l@{}}Xception\\ \textit{Original improvements}\end{tabular} & 0.9780 & 0.9919 & 0.9640 & 0.9775 & 1203 \\
+    \begin{tabular}[c]{@{}l@{}}Xception\\ \textit{No improvements}\end{tabular} & 0.9730 & 0.9829 & 0.9630 & 0.9725 & 795 \\
+    \begin{tabular}[c]{@{}l@{}}Xception\\ \textit{No weights}\end{tabular} & 0.5000 & 0.4000 & 0.8000 & 0.5333 & 227 \\ \hline
+    \multicolumn{6}{c}{LARGE DATASET} \\ \hline
+    \begin{tabular}[c]{@{}l@{}}Xception\\ \textit{Original improvements}\end{tabular} & 0.9670 & 0.9632 & 0.9720 & 0.9671 & 7413 \\
+    \begin{tabular}[c]{@{}l@{}}Xception\\ \textit{No improvements}\end{tabular} & 0.9380 & 0.9901 & 0.8860 & 0.9281 & 7212 \\
+    \begin{tabular}[c]{@{}l@{}}Xception\\ \textit{No weights}\end{tabular} & 0.9625 & 0.9741 & 0.9520 & 0.9621 & 9893
+    \label{fig:final-binary-results-short}
+\end{longtable}
+
+The following are a summary of the results from the final round of training, showing the performance of the Xception model with the first, and best improvements (\autoref{fig:xception-model-final}) and the performance of the Xception model with no improvements (\autoref{fig:xception-model-final-no-improv}). Each of which are trained on both the small and large datasets of the multi-label classification label sets. The full results of each model can be seen in \autoref{fig:xception-model-multi-results}. Note, here the Accuracy, Precision, Recall and F1 Scores are taken from a mean of the evaluation of each fold on the test dataset for conciseness.
+
+\begin{longtable}[c]{l|l|l|l|l|l}
+    \caption{Final training results of the multi-label classification performance of the Xception models, with improvements from this study, and without.} \\
+    Model & Accuracy & Precision & Recall & \begin{tabular}[c]{@{}l@{}}F1\\ Score\end{tabular} & \begin{tabular}[c]{@{}l@{}}Training\\ Time (s)\end{tabular} \\ \hline\hline
+    \endfirsthead
+    %
+    \multicolumn{6}{c}%
+    {{\bfseries Table \thetable\ continued from previous page}} \\
+    Model & Accuracy & Precision & Recall & \begin{tabular}[c]{@{}l@{}}F1\\ Score\end{tabular} & \begin{tabular}[c]{@{}l@{}}Training\\ Time (s)\end{tabular} \\ \hline\hline
+    \endhead
+    %
+    \multicolumn{6}{c}{SMALL DATASET} \\ \hline
+    \begin{tabular}[c]{@{}l@{}}Xception\\ \textit{No Improvements}\end{tabular} & 0.8110 & 0.8461 & 0.8450 & 0.8018 & 545 \\
+    \begin{tabular}[c]{@{}l@{}}Xception\\ \textit{Original Improvements}\end{tabular} & 0.9335 & 0.9185 & 0.9267 & 0.9219 & 673 \\ \hline
+    \multicolumn{6}{c}{LARGE DATASET} \\ \hline
+    \begin{tabular}[c]{@{}l@{}}Xception\\ \textit{No Improvements}\end{tabular} & 0.9565 & 0.9499 & 0.9453 & 0.9468 & 7804 \\
+    \begin{tabular}[c]{@{}l@{}}Xception\\ \textit{Original Improvements}\end{tabular} & 0.9530 & 0.9436 & 0.9460 & 0.9441 & 7973
+    \label{fig:final-multi-results-short}
 \end{longtable}
