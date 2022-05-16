@@ -348,12 +348,52 @@ The following are a summary of the results from the final round of training, sho
     \endhead
     %
     \multicolumn{6}{c}{SMALL DATASET} \\ \hline
-    \begin{tabular}[c]{@{}l@{}}Xception\\ \textit{No Improvements}\end{tabular} & 0.8110 & 0.8461 & 0.8450 & 0.8018 & 545 \\
-    \begin{tabular}[c]{@{}l@{}}Xception\\ \textit{Original Improvements}\end{tabular} & 0.9335 & 0.9185 & 0.9267 & 0.9219 & 673 \\ \hline
+    \begin{tabular}[c]{@{}l@{}}Xception\\ \textit{No improvements}\end{tabular} & 0.8110 & 0.8461 & 0.8450 & 0.8018 & 545 \\
+    \begin{tabular}[c]{@{}l@{}}Xception\\ \textit{Original improvements}\end{tabular} & 0.9335 & 0.9185 & 0.9267 & 0.9219 & 673 \\ \hline
     \multicolumn{6}{c}{LARGE DATASET} \\ \hline
-    \begin{tabular}[c]{@{}l@{}}Xception\\ \textit{No Improvements}\end{tabular} & 0.9565 & 0.9499 & 0.9453 & 0.9468 & 7804 \\
-    \begin{tabular}[c]{@{}l@{}}Xception\\ \textit{Original Improvements}\end{tabular} & 0.9530 & 0.9436 & 0.9460 & 0.9441 & 7973
+    \begin{tabular}[c]{@{}l@{}}Xception\\ \textit{No improvements}\end{tabular} & 0.9565 & 0.9499 & 0.9453 & 0.9468 & 7804 \\
+    \begin{tabular}[c]{@{}l@{}}Xception\\ \textit{Original improvements}\end{tabular} & 0.9530 & 0.9436 & 0.9460 & 0.9441 & 7973
     \label{fig:final-multi-results-short}
 \end{longtable}
 
 \section{Result Analysis}
+Looking firstly at the initial training results, it is immediately clear that Xception is the strongest performing network after hyper-parameter tuning was performed. However, looking at the box and whisker plot in \autoref{fig:round-1-model-accuracy}, while Xception has the strongest performing model, DenseNet has a lot less variability in performance and its performance is close to Xception. This could well be due to the fact that while both models share roughly the same amount of trainable parameters ($\sim$20 million) DenseNet has a much larger depth (amount of layers) \citep{KerasApp92:online}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/round-1-model-accuracy.png}
+    \caption{Initial training model accuracy, separated by network type.}
+    \label{fig:round-1-model-accuracy}
+\end{figure}
+
+The improvement of accuracy of Xception versus DenseNet comes at a cost of training time. Comparing training time to accuracy in \autoref{fig:round-1-model-training-time} shows a trend that a longer training time is generally necessary to improve accuracy. There are a number of outliers here however, as smaller models with the best tuned hyper-parameters outperform larger models with worse tuned hyper-parameters.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/round-1-model-training-time2.png}
+    \caption{Initial training model accuracy versus time.}
+    \label{fig:round-1-model-training-time}
+\end{figure}
+
+Outliers to this theory could also be due to the age of the networks. One such example in this case is AlexNet, which was published in 2012, versus DenseNet, which was published in 2016. When using the best hyper-parameter combinations for each model, while they both share a similar straining time, DenseNet is $\sim$0.27 more accurate than AlexNet. This can be seen in \autoref{fig:round-1-best-model-training-time}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/round-1-best-model-training-time.png}
+    \caption{Differences between model age, accuracy and time.}
+    \label{fig:round-1-best-model-training-time}
+\end{figure}
+
+Hyper-parameters had a large effect on model performance. An example of this is the difference between Xception's best and worse performing hyper-parameters, seen in \autoref{fig:xception-best-worst-hparams}, which have a difference of $\sim$0.38 accuracy.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/xception-best-worst-hparams.png}
+    \caption{Xception's best and worse performing hyper-parameters.}
+    \label{fig:xception-best-worst-hparams}
+\end{figure}
+
+The hyper-parameters of one model, which perform well, might not necessarily mean that they would work well for another model however. As seen in 
+
+Talk about results, which model performed the best, why Xception was chosen for improvements, the improvements chosen for final evaluation, the final models, differences between them, maybe say hard to tell which is best?
+
