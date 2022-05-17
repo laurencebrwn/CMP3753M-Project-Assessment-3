@@ -411,14 +411,38 @@ The hyper-parameters of one model, which perform well, might not necessarily mea
     \label{fig:round-1-learning-rate}
 \end{figure}
 
-Xception was chosen to move to the model improvements round as its best model had the best accuracy, precision, recall and F1 score out of all assessed models. The improvements made to the Xception network past the initial ones made during the initial round did not prove successful. While some advancements were made in reducing training time, this meant a hit in accuracy. One such example is that of Improvement 4, which boasts a 46\% reduction in training time while only having a 16\% decrease in accuracy, seen in \autoref{fig:round-2-accuracy-training}. This change is likely due to the concatenation of the ResNet network alongside the addition layers as proposed by \cite{fitriasari2021improvement}, as the training times seen are similar to those of ResNet. This correlation is not wholly due to the concatenation of ResNet however, as Improvement 3, which also uses this design, does not show the same improvements in training times.
+Xception was chosen to move to the model improvements round as its best model had the best accuracy, precision, recall and F1 score out of all assessed models. The improvements made to the Xception network following the initial ones made during the initial round did not prove successful. While some advancements were made in reducing training time, this meant a hit in accuracy. One such example is that of Improvement 4, which boasts a 46\% reduction in training time while only having a 16\% decrease in accuracy, seen in \autoref{fig:round-2-accuracy-training}. This change is likely due to the concatenation of the ResNet network alongside the addition layers as proposed by \cite{fitriasari2021improvement}, as the training times seen are similar to those of ResNet. This correlation is not wholly due to the concatenation of ResNet however, as Improvement 3, which also uses this design, does not show the same improvements in training times.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{figures/round-2-accuracy-training.png}
-    \caption{Model performance based on the learning rate hyper-parameter.}
+    \caption{Model improvements performance during the second round of training.}
     \label{fig:round-2-accuracy-training}
 \end{figure}
 
-Talk about results, which model performed the best, why Xception was chosen for improvements, the improvements chosen for final evaluation, the final models, differences between them, maybe say hard to tell which is best?
+Xception, with the original improvements, was chosen to move on to the final stage of evaluation as it retained the highest accuracy, precision, recall and F1 score out of all assessed model improvements. Here the three models assessed (original improvements, no improvements and no weights) were trained on the small dataset, the large dataset and on the multi-label classification dataset. \autoref{fig:round-3-small-vs-large} shows that the original improvements remain the most accurate when trained on both the small and large dataset. One interesting observation to note is the decrease in accuracy of the original improvements model and no improvements model when moving from the small dataset to the large dataset. This is likely due to be caused by over-fitting of the model, where the model is too closely aligned to the training data, and such cannot classify other data as easily. The case is opposite for the model with no pre-trained weights however, seeing a large improvement between the small and large dataset. This is likely to be caused by under-fitting of the model, where it cannot gather enough data to distinguish between classes on a small dataset.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/round-3-small-vs-large.png}
+    \caption{Final model performance compared to those with no improvements and no weights, on the small and large dataset.}
+    \label{fig:round-3-small-vs-large}
+\end{figure}
+
+From \autoref{fig:round-3-small-vs-large} it can be seen that the model with no improvements drops in accuracy significantly more that the model with the original improvements when training on the large dataset. Analysing this drop in relation to the number of trainable parameters, seen in \autoref{fig:round-3-trainable-params}, it is likely that the original improvements model with a higher number of trainable parameters is able to represent the more complex functions, like the data gathered from a large dataset, compared to one with less.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/round-3-trainable-params.png}
+    \caption{Model accuracy in relation to trainable parameters.}
+    \label{fig:round-3-trainable-params}
+\end{figure}
+
+This phenomena can be seen more clearly when comparing results from the binary classification problem to those from the multi-label classification problem. \autoref{fig:round-3-classification-problems} shows this accuracy reduction disparity again, with the accuracy drop of the model with fewer trainable parameters being much more than the model with more trainable parameters. This confirms the theory of being able to represent more complex functions with a larger model.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/round-3-classification-problems.png}
+    \caption{Model accuracy between the different classification problems.}
+    \label{fig:round-3-classification-problems}
+\end{figure}
