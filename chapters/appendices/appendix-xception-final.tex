@@ -52,6 +52,93 @@
 \end{landscape}
 
 \begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/cm-n-weight-s-b.png}
+        \caption{Small binary dataset.}
+        \label{fig:cm-n-weight-s-b}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/cm-n-weight-l-b.png}
+        \caption{Large binary dataset.}
+        \label{fig:cm-n-weight-l-b}
+    \end{subfigure}
+    \caption{Confusion matrices for the Xception without weights.}
+    \label{fig:cm-no-weights}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/cm-no-improv-s-b.png}
+        \caption{Small binary dataset.}
+        \label{fig:cm-n-improv-s-b}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/cm-no-improv-l-b.png}
+        \caption{Large binary dataset.}
+        \label{fig:cm-n-improv-l-b}
+    \end{subfigure}
+    \vspace{10mm} %10mm vertical space
+    
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/cm-no-improv-s-m.png}
+        \caption{Small multi-label dataset.}
+        \label{fig:cm-n-improv-s-m}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/cm-no-improv-l-m.png}
+        \caption{Large multi-label dataset.}
+        \label{fig:cm-n-improv-l-m}
+    \end{subfigure}
+    \caption{Confusion matrices for the Xception without improvements.}
+    \label{fig:cm-no-improv}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/cm-orig-s-b.png}
+        \caption{Small binary dataset.}
+        \label{fig:cm-orig-s-b}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/cm-orig-l-b.png}
+        \caption{Large binary dataset.}
+        \label{fig:cm-orig-l-b}
+    \end{subfigure}
+    \vspace{10mm} %10mm vertical space
+    
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/cm-orig-s-m.png}
+        \caption{Small multi-label dataset.}
+        \label{fig:cm-orig-s-m}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/cm-orig-l-m.png}
+        \caption{Large multi-label dataset.}
+        \label{fig:cm-orig-l-m}
+    \end{subfigure}
+    \caption{Confusion matrices for the final XceptionCov19 model.}
+    \label{fig:cm-orig}
+\end{figure}
+
+\begin{figure}
      \centering
      \begin{subfigure}[b]{0.49\textwidth}
          \centering
