@@ -357,7 +357,7 @@ The following are a summary of the results from the final round of training, sho
 \end{longtable}
 
 \section{Result Analysis}
-Looking firstly at the initial training results, it is immediately clear that Xception is the strongest performing network after hyper-parameter tuning was performed. However, looking at the box and whisker plot in \autoref{fig:round-1-model-accuracy}, while Xception has the strongest performing model, DenseNet has a lot less variability in performance and its performance is close to Xception. This could well be due to the fact that while both models share roughly the same amount of trainable parameters ($\sim$20 million) DenseNet has a much larger depth (amount of layers) \citep{KerasApp92:online}.
+Looking firstly at the initial training results, it is immediately clear that Xception is the strongest performing network after hyper-parameter tuning was performed. However, looking at the box and whisker plot in \autoref{fig:round-1-model-accuracy}, while Xception was the strongest performing model, DenseNet has a lot less variability in performance and its performance is close to Xception. This could well be due to the fact that while both models share roughly the same amount of trainable parameters ($\sim$20 million) DenseNet has a much larger depth (amount of layers) \citep{KerasApp92:online}.
 
 \begin{figure}[H]
     \centering
@@ -366,7 +366,7 @@ Looking firstly at the initial training results, it is immediately clear that Xc
     \label{fig:round-1-model-accuracy}
 \end{figure}
 
-Another result worth noting from \autoref{fig:round-1-model-accuracy} is the differences between models using transfer learning and those not. Xception, DenseNet and ResNet are the three best performing models, after hyper-parameter tuning, and all three made use of transfer learning with the pre-trained ImageNet weights. However SqueezeNet breaks this trend, as it boasts results close to the three transfer learning models without making use of transfer learning itself. This is likely due to SqueezeNets small size, allowing for faster training to reach a higher accuracy within the maximum allowed epochs.
+Another result worth noting from \autoref{fig:round-1-model-accuracy} is the differences between models using transfer learning and those not. Xception, DenseNet and ResNet are the three best performing models, after hyper-parameter tuning, and all three made use of transfer learning with the pre-trained ImageNet weights. However, SqueezeNet breaks this trend, as it boasts results close to the three transfer learning models without making use of transfer learning itself. This is likely due to SqueezeNet's small size, allowing for faster training to reach a higher accuracy within the maximum allowed epochs.
 
 The improvement of accuracy of Xception versus DenseNet comes at a cost of training time. Comparing training time to accuracy in \autoref{fig:round-1-model-training-time} shows a trend that a longer training time is generally necessary to improve accuracy. There are a number of outliers here however, as smaller models with the best tuned hyper-parameters outperform larger models with worse tuned hyper-parameters.
 
@@ -395,7 +395,7 @@ Hyper-parameters had a large effect on model performance. An example of this is 
     \label{fig:xception-best-worst-hparams}
 \end{figure}
 
-The hyper-parameters of one model, which perform well, might not necessarily mean that they would work well for another model however. As seen in \autoref{fig:round-1-dense-units} and \autoref{fig:round-1-learning-rate}, there is little variability in accuracy when using different hyper-parameters, when looking at the accuracy produced by all models.
+However, the hyper-parameters of one model that perform well, may not necessarily work well for another model. As seen in \autoref{fig:round-1-dense-units} and \autoref{fig:round-1-learning-rate}, there is little variability in accuracy when using different hyper-parameters, when looking at the accuracy produced by all models.
 
 \begin{figure}[H]
     \centering
@@ -411,7 +411,7 @@ The hyper-parameters of one model, which perform well, might not necessarily mea
     \label{fig:round-1-learning-rate}
 \end{figure}
 
-Xception was chosen to move to the model improvements round as its best model had the best accuracy, precision, recall and F1 score out of all assessed models. The improvements made to the Xception network following the initial ones made during the initial round did not prove successful. While some advancements were made in reducing training time, this meant a hit in accuracy. One such example is that of Improvement 4, which boasts a 46\% reduction in training time while only having a 16\% decrease in accuracy, seen in \autoref{fig:round-2-accuracy-training}. This change is likely due to the concatenation of the ResNet network alongside the addition layers as proposed by \cite{fitriasari2021improvement}, as the training times seen are similar to those of ResNet. This correlation is not wholly due to the concatenation of ResNet however, as Improvement 3, which also uses this design, does not show the same improvements in training times.
+Xception was chosen for the model improvements round as it had the best accuracy, precision, recall and F1 score out of all assessed models. The improvements made to the Xception network, following the initial ones made during the first round, did not prove successful. While some advancements were made in reducing training time, this meant a hit in accuracy. One such example is that of Improvement 4, which boasts a 46\% reduction in training time while only having a 16\% decrease in accuracy, seen in \autoref{fig:round-2-accuracy-training}. This change is likely due to the concatenation of the ResNet network alongside the addition layers as proposed by \cite{fitriasari2021improvement}, as the training times seen are similar to those of ResNet. This correlation is not wholly due to the concatenation of ResNet however, as Improvement 3, which also uses this design, does not show the same improvements in training times.
 
 \begin{figure}[H]
     \centering
@@ -420,7 +420,7 @@ Xception was chosen to move to the model improvements round as its best model ha
     \label{fig:round-2-accuracy-training}
 \end{figure}
 
-Xception, with the original improvements, was chosen to move on to the final stage of evaluation as it retained the highest accuracy, precision, recall and F1 score out of all assessed model improvements. Here the three models assessed (original improvements, no improvements and no weights) were trained on the small dataset, the large dataset and on the multi-label classification dataset. \autoref{fig:round-3-small-vs-large} shows that the original improvements remain the most accurate when trained on both the small and large dataset. One interesting observation to note is the decrease in accuracy of the original improvements model and no improvements model when moving from the small dataset to the large dataset. This is likely due to be caused by over-fitting of the model, where the model is too closely aligned to the training data, and such cannot classify other data as easily. The case is opposite for the model with no pre-trained weights however, seeing a large improvement between the small and large dataset. This is likely to be caused by under-fitting of the model, where it cannot gather enough data to distinguish between classes on a small dataset.
+Xception, with the original improvements, was chosen for the final stage of evaluation as it retained the highest accuracy, precision, recall and F1 score out of all assessed model improvements. Here the three models assessed (original improvements, no improvements and no weights) were trained on the small dataset, the large dataset and on the multi-label classification dataset. \autoref{fig:round-3-small-vs-large} shows the original improvements remain the most accurate when trained on both the small and large dataset. One interesting observation to note is the decrease in accuracy of the original improvements model and no improvements model when moving from the small dataset to the large dataset. This is likely due to over-fitting of the model, where the model is too closely aligned to the training data, and as such cannot classify other data as easily. However, the opposite is the case for the model with no pre-trained weights, which was evident in the large improvement between the small and large dataset. This is likely to be caused by under-fitting of the model, where it cannot gather enough data to distinguish between classes on a small dataset.
 
 \begin{figure}[H]
     \centering
@@ -438,7 +438,7 @@ From \autoref{fig:round-3-small-vs-large} it can be seen that the model with no 
     \label{fig:round-3-trainable-params}
 \end{figure}
 
-This phenomena can be seen more clearly when comparing results from the binary classification problem to those from the multi-label classification problem. \autoref{fig:round-3-classification-problems} shows this accuracy reduction disparity again, with the accuracy drop of the model with fewer trainable parameters being much more than the model with more trainable parameters. This confirms the theory of being able to represent more complex functions with a larger model.
+This phenomenon can be seen more clearly when comparing results from the binary classification problem to those from the multi-label classification problem. \autoref{fig:round-3-classification-problems} shows this accuracy reduction disparity again, with the accuracy drop of the model with fewer trainable parameters being significantly more than the model with a higher number of trainable parameters. This confirms the theory of being able to represent more complex functions with a larger model.
 
 \begin{figure}[H]
     \centering
