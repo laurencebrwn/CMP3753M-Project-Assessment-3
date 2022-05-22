@@ -15,7 +15,7 @@ In this project, TensorBoard 2.8.0 was used and is a hard requirement to run the
 \subsubsection{Scikit-Learn}
 In this project, Scikit-Learn 1.0.2 was used and is a hard requirement to run the artefact.
 
-\subsubsection{pandas}
+\subsubsection{Pandas}
 In this project, pandas 1.3.5 was used and is a hard requirement to run the artefact.
 
 \subsubsection{NumPy}
@@ -108,7 +108,7 @@ The dataset labels then had to be linked with the corresponding images. This was
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{figures/image-preprocessing.png}
-    \caption{Down-sampling and shuffling the dataset.}
+    \caption{Performing image pre-processing.}
     \label{fig:image-preprocessing}
 \end{figure}
 
@@ -242,12 +242,12 @@ The third improvement drew inspiration from \cite[p. 343]{fitriasari2021improvem
 
 While training, the model learnt relatively slowly compared to other models; this was likely due it its large size. While model accuracy was not improved at all, further trial and error of this architecture lead to the next round of improvements.
 
-\subsubsection{Improvement 4}
+\subsubsection{Improvement 4 - Xception-ResNet Exact Replication}
 The fourth improvement was an exact replica of the \cite{fitriasari2021improvement} model. Here the two "sub-models" had no additional layers added before concatenation, and all trainable layers were frozen, with the exception of the last three. Following the "sub-models" concatenation, the output of the two were passed through a Conv2D layer, flattened and passed through a Dropout layer followed by 2 Dense layers, one with a ReLU activation function and the other with a sigmoid activation function. The first dense layer was regularised and the second was used as the output layer. The full model code can be seen in \autoref{fig:xception-improvement-4}.
 
 Here the training time was halved, showing a significant improvement over all other models training time. This is likely due to the frozen training layers. While the model accuracy was only slightly less than improvement 3, the model showed an alarmingly high number of False Negatives, so was no longer considered for the final assessment.
 
-\subsubsection{Improvement 5}
+\subsubsection{Improvement 5 - Final Trial}
 The final trial at improving the Xception model took cues from all the previous attempted improvements, by combining them into one model. Here none of the weights were frozen and the same layers were after the Xception model as in Improvement 4, which showed some speed increases with regularisation, and consistency with the Conv2D layer and Dense layers. The full model code can be seen in \autoref{fig:xception-improvement-5}.
 
 The final round of improvements did show some promise, with significantly faster training times, but this came at a cost of a much worse mean accuracy in validation and testing. Eventually all improvements were abandoned, and the original alterations to the network where deemed the most suitable and performant.
