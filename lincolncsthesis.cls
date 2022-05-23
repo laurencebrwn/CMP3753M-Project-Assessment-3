@@ -310,7 +310,7 @@
     
     % Some space, then the author, then the school and university
     % name
-    \vspace{1.5cm}
+    \vspace{1.25cm}
   %  {\large \@author \@ifundefined{@studentnumber}{}{\\ \@studentnumber} \par}\vspace{0.45cm}
     {\large \@author \\ \footnotesize \@studentnumber \par}\vspace{0.45cm}
      {\footnotesize \@email \par}\vspace{0.45cm}
@@ -321,11 +321,13 @@
     {\footnotesize \submissionStatement \par}
     
     % Print out the supervisor
-    \vspace{1cm}
+    \vspace{0.75cm}
     \printSupervisor
     
+    \vspace{0.75cm}
+    \textit{Word Count} 13,105 \\
     % Then the fancy date!
-    \vspace{1cm}
+    \vspace{0.75cm}
     {\footnotesize \@ifundefined{@modulecode}{}{\@modulecode \\} \@date \par}
     
 	\end{titlepage}
