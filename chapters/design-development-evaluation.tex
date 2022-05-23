@@ -4,13 +4,13 @@ In order to run the code and reproduce results, software requirements must be in
 
 \phantomsection
 \subsubsection{Python}
-The entirety of the project's code was written in Python and such is a hard requirement to run the project's code. It is recommended to use Python 3.7 or later for TensorFlow support.
+The entirety of the project's code was written in Python and is a hard requirement to run the project's code. It is recommended to use Python 3.7 or later for TensorFlow support.
 
 \subsubsection{TensorFlow and Keras}
-Both TensorFlow and Keras were used for the entirety of this project and such is a hard requirement to run the code. TensorFlow 2.0 and Keras 2.0 or later are recommended, with some code modifications; but TensorFlow 1.0+ and Keras 1.0+ can also be used.
+Both TensorFlow and Keras were used for the entirety of this project and as such is a hard requirement to run the code. TensorFlow 2.0 and Keras 2.0 or later are recommended, with some code modifications; but TensorFlow 1.0+ and Keras 1.0+ can also be used.
 
 \subsubsection{TensorBoard}
-In this project, TensorBoard 2.8.0 was used and is a hard requirement to run the artefact. As with TensorFlow, it is recommended TensorBoard 2.0 or later is used, however with some code modifications, TensorBoard 1.0+ can also be used
+In this project, TensorBoard 2.8.0 was used and is a hard requirement to run the artefact. As with TensorFlow, it is recommended TensorBoard 2.0 or later is used, however with some code modifications, TensorBoard 1.0+ can also be used.
 
 \subsubsection{Scikit-Learn}
 In this project, Scikit-Learn 1.0.2 was used and is a hard requirement to run the artefact.
@@ -28,13 +28,13 @@ Google Cloud Platform and its subsidiary solutions are not a requirement to run 
 Google Colab is not a requirement to run the artefact, however a Jupyter notebook solution, such as Google Colab, must be used.
 
 \subsubsection{Project Code}
-The project code is hosted on GitHub, and can be accessed and downloaded through the following link: \url{https://github.com/laurencebrwn/ml-covid19-eval}. The results and individual models notebook files are all found here.
+The project code is hosted on GitHub, and can be accessed and downloaded through the following link: \url{https://github.com/laurencebrwn/ml-covid19-eval}. The results and individual model's notebook files are all found here.
 
 \subsubsection{COVIDx-CXR Dataset}
 The dataset used to train the image classification models is a hard requirement for this project. The full dataset is hosted on kaggle, details of which can be found here: \url{https://github.com/lindawangg/COVID-Net/blob/master/docs/COVIDx.md}. The images should be obtained from the "COVIDx CXR-2 Kaggle Dataset" link (\url{https://www.kaggle.com/datasets/andyczhao/covidx-cxr2}) detailed on the previously linked page. The labels for both binary ("train\_COVIDx9B.txt" and "test\_COVIDx9B.txt") and multi-label ("train\_COVIDx9A.txt" and "test\_COVIDx9A.txt") classification, can be downloaded from the link (\url{https://github.com/lindawangg/COVID-Net/tree/master/labels}) detailed on the previously linked page.
 
 \subsection{Hardware Requirements}
-While TensorFlow can run on a large number of devices, there are some hardware limitations, especially if a Graphical Processing Unit (GPU) is used to accelerate performance. TensorFlow requires a CPU capable of AVX instructions, which most modern Computational Processing Units (CPU) support \citep{InstallT17:online}. If GPU acceleration is required and the device used has an NVIDIA GPU, then it must support compute unified device architecture (CUDA), a "parallel computing platform" which can "dramatically speed up computing applications by harnessing the power of GPUs" \citep{CUDAZone2:online}. If the device has a GPU that does not support CUDA, but does support DirectX 12 (e.g. an AMD GPU manufactured in the last several years), then Microsoft's DirectML can be used to enable GPU support for TensorFlow \citep{Introduc93:online}. However, precautions must be taken if DirectML is used as it has differing version requirements of Python, TensorFlow and NumPy.
+While TensorFlow can run on a large number of devices, there are some hardware limitations, especially if a Graphical Processing Unit (GPU) is used to accelerate performance. TensorFlow requires a CPU capable of AVX instructions, which most modern Computational Processing Units (CPU) support \citep{InstallT17:online}. If GPU acceleration is required and the device used has an NVIDIA GPU, then it must support compute unified device architecture (CUDA), a "parallel computing platform" which can "dramatically speed up computing applications by harnessing the power of GPUs" \citep{CUDAZone2:online}. If the device has a GPU that does not support CUDA, but does support DirectX 12 (e.g. an AMD GPU manufactured after 2012), then Microsoft's DirectML can be used to enable GPU support for TensorFlow \citep{Introduc93:online}. However, precautions must be taken if DirectML is used as it has differing version requirements of Python, TensorFlow and NumPy.
 
 \section{Design} \label{design}
 To design software capable of training and evaluating each of the selected models, as identified in the literature review, prompts were taken from the methodology to devise a structure to form each model’s notebook. By implementing a general structure that all models would inherit, it made changes to the models and hyper parameters easy, while reducing development time. Although there are a few variations for each model, a common format was followed for all models:
@@ -113,12 +113,12 @@ The dataset labels then had to be linked with the corresponding images. This was
 \end{figure}
 
 \subsection{Creating the Models}
-Next each of the six models had to be built. While each models architecture differed, each model used some or all of the same layers. To understand this better research was carried out on each layer's functions. The following is an explanation for layers used in the models:
+Next each of the six models had to be built. While each model's architecture differed, each model used some or all of the same layers. To understand this better, research was carried out on each layer's functions. The following is an explanation for layers used in the models:
 
 \begin{itemize}
     \item Dense -  A deeply connected neural network layer (all neurons receive inputs from all neurons in the previous layer) that performs matrix-vector multiplication, with the values of said matrix being trained and updated with back propagation \citep{Denselay11:online}.
     \item Conv2D - Creates a convolution kernel that is convolved with the input, in this case an image, or the previous layer's output. The result of the kernel produces a tensor of outputs \citep{Conv2Dla69:online}.
-    \item GlobalAveragePooling2D - Down-samples the entire feature map to a single value. In a 2D layer it takes a 4D tensor and returns a 2D tensor with the shape of (batch size, number of channels) \citep{GlobalAv91:online}.
+    \item GlobalAveragePooling2D - Down-samples the entire feature map to a single value. In a 2D layer it takes a 4D tensor and returns a 2D tensor with the shape of batch size $\times$ number of channels \citep{GlobalAv91:online}.
     \item BatchNormalization - Normalises its inputs by applying a transformation that maintains the outputs mean to as close to 0 as possible and its standard deviation as close to 1 as possible \citep{BatchNor52:online}.
     \item Dropout - Randomly sets input values to 0, at a user defined frequency, to prevent over-fitting. Those inputs that are not set to 0 are scaled so the total sum of the inputs is unchanged \citep{Dropoutl66:online}.
     \item Activation - Applies a user defined activation function to the input, while retaining the input shape \citep{Activati33:online}.
@@ -143,21 +143,21 @@ Since Keras has no application model available for AlexNet, it had to be reprodu
 
 AlexNet consists of 5 Conv2D layers, each of which is followed by a BatchNormalization layer, an Activation layer with a rectified linear activation function (ReLU) and a MaxPooling2D layer, before being passed to the next Conv2D layer. Following this the output is flattened, and passed to 3 Dense layers, each of which is followed by a BatchNormalization layer, an Activation layer with a rectified linear activation function (ReLU) and a Dropout layer. This is finally followed by an output layer, which is a Dense layer with a single output (for binary classification), a BatchNormalization layer and an Activation layer with a sigmoid activation function.
 
-Hyper-parameter tuning involved changing the final Dense layer's number of units, all three Dense layers dropout values, the optimiser and the learning rate. The full model code can be seen in \autoref{fig:alexnet-model-part1} and \autoref{fig:alexnet-model-part2}.
+Hyper-parameter tuning involved changing the final Dense layer's number of units, all three Dense layers' dropout values, the optimiser and the learning rate. The full model code can be seen in \autoref{fig:alexnet-model-part1} and \autoref{fig:alexnet-model-part2}.
 
 \subsubsection{DenseNet201}
 DenseNet201 is included in Keras' application models, so could be imported with pre-trained weights, without having to be reproduced. The architecture Keras uses is taken from \cite{huang2017densely}.
 
 To build the implementation for DenseNet201 used in this project, the base model was imported from Keras' applications, with the pre-trained weights from training on the ImageNet dataset. It was then added to a Keras sequential API where some additional layers were added, to prevent over-fitting and produce a usable output. This was achieved by adding a GlobalAveragePooling2D layer that received DenseNet201's output, followed by a Dense layer with a rectified linear activation function (ReLU), followed by a BatchNormalization layer and a Dropout layer. This was finally followed by an output layer, which is a Dense layer with a single output (for binary classification) and a sigmoid activation function.
 
-Hyper-parameter tuning involved changing the final Dense layer's number of units, the Dropout layers dropout values, the optimiser and the learning rate. The full model code can be seen in \autoref{fig:densenet-model}.
+Hyper-parameter tuning involved changing the final Dense layer's number of units, the Dropout layer's dropout values, the optimiser and the learning rate. The full model code can be seen in \autoref{fig:densenet-model}.
 
 \subsubsection{ResNet50V2}
 The implementation of ResNet50V2 follows a similar route to DenseNet201, as the model is available from Keras' application models. The architecture Keras uses is taken from \cite{he2016identity}.
 
 To build the implementation for ResNet50V2 used in this project, the base model was imported from Keras' applications, with the pre-trained weights from training on the ImageNet dataset. It was then added to a Keras sequential API, where additional layers were added to prevent over-fitting and produce a usable output. This was achieved by adding a GlobalAveragePooling2D layer that received ResNet50V2's output, followed by a Dense layer with a rectified linear activation function (ReLU), followed by a BatchNormalization layer and a Dropout layer. This was finally followed by an output layer, which is a Dense layer with a single output (for binary classification) and a sigmoid activation function.
 
-Hyper-parameter tuning involved changing the final Dense layer's number of units, the Dropout layers dropout values, the optimiser and the learning rate. The full model code can be seen in \autoref{fig:resnet-model}.
+Hyper-parameter tuning involved changing the final Dense layer's number of units, the Dropout layer's dropout values, the optimiser and the learning rate. The full model code can be seen in \autoref{fig:resnet-model}.
 
 \subsubsection{SqueezeNet}
 Since Keras has no application model available for SqueezeNet, it had to be reproduced manually using Keras' functional API. A description of the architecture, taken from \cite{iandola2016squeezenet}, was used for this.
@@ -178,10 +178,10 @@ ConvNet is a basic CNN created for this project using Keras' sequential API, con
 
 To build ConvNet, a sequential model was instantiated, and three Conv2D layers were added. Following each Conv2D layer sat an Activation layer with a rectified linear activation function (ReLU) and a MaxPooling2D layer. The Conv2D layers had filter sizes of 32, 32 and 64 respectively, while all sharing the same 3$\times$3 kernel size. The output of the three Conv2D layers (in series) was then flattened and fed to the output portion of the model. The output portion of ConvNet was not too dissimilar from Xception, DenseNet201 and ResNet50V2. The output section aimed to reduce over-fitting and improve accuracy further, this was achieved by adding a Dense layer with a rectified linear activation function (ReLU) and a Dropout layer. This was finally followed by an output layer, which is a Dense layer with a single output (for binary classification) and a sigmoid activation function.
 
-Hyper-parameter tuning involved changing the final Dense layers number of units, the Dropout layers dropout values, the optimiser and the learning rate. The full model code can be seen in \autoref{fig:convnet-model}.
+Hyper-parameter tuning involved changing the final Dense layer's number of units, the Dropout layer's dropout values, the optimiser and the learning rate. The full model code can be seen in \autoref{fig:convnet-model}.
 
 \subsection{Cross Validation Training}
-Next the model must be trained, and its hyper-parameters tuned, using stratified K fold cross validation. Firstly, to perform hyper-parameter tuning, all the hyper-parameter combinations must be iterated through. For each iteration of hyper-parameter combinations, cross validation was then performed. Using Scikit-Learns stratified K fold implementation, indexes for the training and validation dataset were created. These variations of indexes, put together to create 5 folds, were then iterated through. For each set of training and validation indexes, the images for each were collected using the pre-processing function discussed earlier. Logging for the model was set up, so that TensorBoard could record the fitting data of the models, over the epochs that the model trained. Details of the hyper-parameters used for each particular run were also stored. Several callbacks were used while training the model, the most notable were the following. Firstly, the model checkpoint callback, which saved the trained model weights of each model. Secondly, the early stopping callback, which finished the model training if the validation loss rate plateaued over three epochs. Third, the learning rate reduction callback, which reduced the learning rate by a factor of half if the validation loss plateaued over one epoch. The model was then trained, over a maximum of 20 epochs, using the previously discussed callbacks and training and validation datasets. Finally the location of where the model's weights were saved was recorded, so each trained model could be called upon during validation. A snippet of the cross validation code, where the folds are iterated through, the model trained and metrics recorded, can be seen in \autoref{fig:cv-function}.
+Next the model must be trained, and its hyper-parameters tuned, using stratified K fold cross validation. To perform hyper-parameter tuning, all the hyper-parameter combinations must be iterated through. For each iteration of hyper-parameter combinations, cross validation was then performed. Using Scikit-Learns stratified K fold implementation, indexes for the training and validation dataset were created. These variations of indexes, put together to create 5 folds, were then iterated through. For each set of training and validation indexes, the images for each were collected using the pre-processing function discussed earlier. Logging for the model was set up, so that TensorBoard could record the fitting data of the models, over the epochs that the model trained. Details of the hyper-parameters used for each particular run were also stored. Several callbacks were used while training the model, the most notable were the following. Firstly, the model checkpoint callback, which saved the trained model weights of each model. Secondly, the early stopping callback, which finished the model training if the validation loss rate plateaued over three epochs. Third, the learning rate reduction callback, which reduced the learning rate by a factor of half if the validation loss plateaued over one epoch. The model was then trained, over a maximum of 20 epochs, using the previously discussed callbacks and training and validation datasets. Finally the location of where the model's weights were saved was recorded, so each trained model could be called upon during validation. A snippet of the cross validation code, where the folds are iterated through, the model trained and metrics recorded, can be seen in \autoref{fig:cv-function}.
 
 \begin{figure}[H]
     \centering
@@ -226,7 +226,7 @@ The first improvement to the Xception model was to freeze all the base model's t
 This yielded far worse results, possibly due to the fact that Xceptions pre-trained weights are from training on ImageNet, a dataset of images of objects, few of which, if any, could be X-Ray images. The changes were not carried onto the next round of improvements.
 
 \subsubsection{Improvement 2 - Regularisation}
-The second improvement made to the Xception model was to add regularisers to the Dense layer appended to the base model, seen in \autoref{fig:xception-regular}. Regularisers apply a penalty on the layer parameters and activity during model optimisation, this penalty is used in the loss function that the model works on optimising while training \citep{Layerwei14:online}. During this round another optimiser was also trialed as an extension to the hyper-parameter tuning, stochastic gradient descent with momentum. Using momentum in gradient descent algorithms can greatly improve training times by helping accelerate the gradient in the correct direction, instead of travelling at a fixed velocity \citep{qian1999momentum}. The full model code can be seen in \autoref{fig:xception-improvement-1}.
+The second improvement made to the Xception model was to add regularisers to the Dense layer appended to the base model, seen in \autoref{fig:xception-regular}. Regularisers apply a penalty on the layer parameters and activity during model optimisation, this penalty is used in the loss function that the model works on optimising while training \citep{Layerwei14:online}. During this round another optimiser was also trialled as an extension to the hyper-parameter tuning, stochastic gradient descent with momentum. Using momentum in gradient descent algorithms can greatly improve training times by helping accelerate the gradient in the correct direction, instead of travelling at a fixed velocity \citep{qian1999momentum}. The full model code can be seen in \autoref{fig:xception-improvement-2}.
 
 \begin{figure}[H]
     \centering
@@ -250,7 +250,7 @@ Here the training time was halved, showing a significant improvement over all ot
 \subsubsection{Improvement 5 - Final Trial}
 The final trial at improving the Xception model took cues from all the previous attempted improvements, by combining them into one model. Here none of the weights were frozen and the same layers were after the Xception model as in Improvement 4, which showed some speed increases with regularisation, and consistency with the Conv2D layer and Dense layers. The full model code can be seen in \autoref{fig:xception-improvement-5}.
 
-The final round of improvements did show some promise, with significantly faster training times, but this came at a cost of a much worse mean accuracy in validation and testing. Eventually all improvements were abandoned, and the original alterations to the network where deemed the most suitable and performant.
+The final round of improvements did show some promise, with significantly faster training times, but this came at a cost of a significantly worse mean accuracy in validation and testing. Eventually all improvements were abandoned, and the original alterations to the network were deemed the most suitable and performant.
 
 \section{Operation of Artefact}
 The operation of the model evaluation notebooks first depends on both the software and hardware requirements listed in section \ref{project-requirements}. Once hardware requirements are met, the Python notebooks downloaded can then be ran, to begin model training and evaluation. The models can be tuned using the model variables section, seen in \autoref{fig:model-variables}, and the hyper-parameters tuning section, seen in \autoref{fig:hyper-parameters-code}. One must pay close attention to the "DATASET\_PATH" variable and ensure it is pointed to the directory in which the COVIDx-CXR dataset resides.
@@ -290,7 +290,7 @@ The following are the results from the initial round of training, showing each o
     \label{fig:initial-results-short}
 \end{longtable}
 
-The following are a summary of the results from the second round of training, showing each of the improvements performance on the Xception model. The full results of each improvement can be seen in \autoref{fig:xception-improvement-results}. Note, here the Accuracy, Precision, Recall and F1 Scores are taken from a mean of the evaluation of each fold on the test dataset for conciseness.
+Below follows a summary of the results from the second round of training, showing each of the improvements performance on the Xception model. The full results of each improvement can be seen in \autoref{fig:xception-improvement-results}. Note, here the Accuracy, Precision, Recall and F1 Scores are taken from a mean of the evaluation of each fold on the test dataset for conciseness.
 
 \begin{longtable}[c]{l|l|l|l|l|l}
     \caption{Improvement training results of the Xception model.} \\
@@ -366,7 +366,7 @@ Looking firstly at the initial training results, it is immediately clear that Xc
     \label{fig:round-1-model-accuracy}
 \end{figure}
 
-Another result worth noting from \autoref{fig:round-1-model-accuracy} is the differences between models using transfer learning and those not. Xception, DenseNet and ResNet are the three best performing models, after hyper-parameter tuning, and all three made use of transfer learning with the pre-trained ImageNet weights. However, SqueezeNet breaks this trend, as it boasts results close to the three transfer learning models without making use of transfer learning itself. This is likely due to SqueezeNet's small size, allowing for faster training to reach a higher accuracy within the maximum allowed epochs. SqueezeNets performance also outperforms the authors predictions of the network, which are that it boasts "AlexNet-level accuracy" \citep{iandola2016squeezenet}, yet here the networks outshines AlexNet by a high margin.
+Another result worth noting from \autoref{fig:round-1-model-accuracy} is the differences between models using transfer learning and those not. Xception, DenseNet and ResNet are the three best performing models, after hyper-parameter tuning, and all three made use of transfer learning with the pre-trained ImageNet weights. However, SqueezeNet breaks this trend, as it boasts results close to the three transfer learning models without making use of transfer learning itself. This is likely due to SqueezeNet's small size, allowing for faster training to reach a higher accuracy within the maximum allowed epochs. SqueezeNet's performance also outperforms the authors' predictions of the network, which are that it boasts "AlexNet-level accuracy" \citep{iandola2016squeezenet}, yet here the networks outshines AlexNet by a high margin.
 
 The improvement of accuracy of Xception versus DenseNet comes at a cost of training time. Comparing training time to accuracy in \autoref{fig:round-1-model-training-time} shows a trend that a longer training time is generally necessary to improve accuracy. There are a number of outliers here however, as smaller models with the best tuned hyper-parameters outperform larger models with worse tuned hyper-parameters.
 
@@ -377,7 +377,7 @@ The improvement of accuracy of Xception versus DenseNet comes at a cost of train
     \label{fig:round-1-model-training-time}
 \end{figure}
 
-Outliers to this theory could also be due to the age of the networks. One such example in this case is AlexNet, which was published in 2012, versus DenseNet, which was published in 2016. When using the best hyper-parameter combinations for each model, while they both share a similar straining time, DenseNet is $\sim$0.27 more accurate than AlexNet. This can be seen in \autoref{fig:round-1-best-model-training-time}.
+Outliers to this theory could also be due to the age of the networks. One such example in this case is AlexNet, which was published in 2012, versus DenseNet, which was published in 2016. When using the best hyper-parameter combinations for each model, while they both share a similar training time, DenseNet is $\sim$0.27 more accurate than AlexNet. This can be seen in \autoref{fig:round-1-best-model-training-time}.
 
 \begin{figure}[H]
     \centering
@@ -429,7 +429,7 @@ Xception, with the original improvements, was chosen for the final stage of eval
     \label{fig:round-3-small-vs-large}
 \end{figure}
 
-From \autoref{fig:round-3-small-vs-large} it can be seen that the model with no improvements drops in accuracy significantly more that the model with the original improvements when training on the large dataset. Analysing this drop in relation to the number of trainable parameters, seen in \autoref{fig:round-3-trainable-params}, it is likely that the original improvements model with a higher number of trainable parameters is able to represent the more complex functions, like the data gathered from a large dataset, compared to one with less.
+From \autoref{fig:round-3-small-vs-large} it can be seen that the model with no improvements drops in accuracy significantly more than the model with the original improvements when training on the large dataset. Analysing this drop in relation to the number of trainable parameters, seen in \autoref{fig:round-3-trainable-params}, it is likely that the original improvements model with a higher number of trainable parameters is able to represent the more complex functions, like the data gathered from a large dataset, compared to one with less.
 
 \begin{figure}[H]
     \centering
